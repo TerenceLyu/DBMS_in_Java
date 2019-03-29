@@ -1,1 +1,1 @@
-echo "Nothing to do..."
+javac Main.java
