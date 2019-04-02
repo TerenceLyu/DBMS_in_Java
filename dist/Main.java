@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 
 /**
  * TerenceLyu
@@ -15,16 +17,9 @@ public class Main
 {
 	public static void main(String[] args) throws IOException
 	{
+		HashMap<Character, String> names = handle_Data_Loading();
+		
 		Scanner input = new Scanner(System.in);
-		String[] filenames = input.nextLine().split(",");
-		HashMap<Character, String> names = new HashMap<>();
-		int letter = 65;
-		for (String s : filenames)
-		{
-			names.put((char) letter, s);
-			System.out.println(names.get((char) letter));
-			letter++;
-		}
 		int numberOfQueries = input.nextInt();
 		for (int i = 0; i < numberOfQueries; i++)
 		{
@@ -55,5 +50,33 @@ public class Main
 //		}
 		
 	}
-//	public static
+	public static HashMap<Character, String> handle_Data_Loading() throws IOException
+	{
+		Scanner input = new Scanner(System.in);
+		String[] filenames = input.nextLine().split(",");
+		HashMap<Character, String> names = new HashMap<>();
+		int letter = 65;
+		String extension = ".txt";
+		for (String filename : filenames)
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+			FileOutputStream fos = new FileOutputStream((char) letter + extension);
+			DataOutputStream dos = new DataOutputStream(fos);
+			String line;
+			while ((line = reader.readLine()) != null)
+			{
+				String[] data = line.split(",");
+				for (String value : data)
+				{
+					dos.writeInt(Integer.parseInt(value));
+				}
+			}
+			
+			names.put((char) letter, (char) letter + extension);
+			letter++;
+			dos.close();
+			reader.close();
+		}
+		return names;
+	}
 }
