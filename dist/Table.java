@@ -6,5 +6,22 @@
  */
 public class Table
 {
-
+	private String path;
+	private int columnCount;
+	
+	public Table(String path, int columnCount)
+	{
+		this.path = path;
+		this.columnCount = columnCount;
+	}
+	
+	public String getPath()
+	{
+		return path;
+	}
+	
+	public int getColumnCount()
+	{
+		return columnCount;
+	}
 }

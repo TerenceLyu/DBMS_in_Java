@@ -1,23 +1,18 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-
 /**
  * TerenceLyu
  * blu96@brandeis.edu
  * cs127_pa3
  * 2019/3/28
  */
+import java.io.*;
+import java.nio.CharBuffer;
+import java.util.HashMap;
+import java.util.Scanner;
 public class Main
 {
 	public static void main(String[] args) throws IOException
 	{
-		HashMap<Character, String> names = handle_Data_Loading();
+		HashMap<Character, Table> names = handle_Data_Loading();
 		
 		Scanner input = new Scanner(System.in);
 		int numberOfQueries = input.nextInt();
@@ -50,33 +45,57 @@ public class Main
 //		}
 		
 	}
-	public static HashMap<Character, String> handle_Data_Loading() throws IOException
+	public static HashMap<Character, Table> handle_Data_Loading() throws IOException
 	{
 		Scanner input = new Scanner(System.in);
 		String[] filenames = input.nextLine().split(",");
-		HashMap<Character, String> names = new HashMap<>();
+		HashMap<Character, Table> tables = new HashMap<>();
 		int letter = 65;
 		String extension = ".txt";
 		for (String filename : filenames)
 		{
-			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+			FileReader fr = new FileReader(new File(filename));
 			FileOutputStream fos = new FileOutputStream((char) letter + extension);
-			DataOutputStream dos = new DataOutputStream(fos);
-			String line;
-			while ((line = reader.readLine()) != null)
+			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
+			CharBuffer cb1 = CharBuffer.allocate(4 * 1024);
+			CharBuffer cb2 = CharBuffer.allocate(4 * 1024);
+			int temp = 1;
+			int columnCount = 0;
+			while (fr.read(cb1) != -1)
 			{
-				String[] data = line.split(",");
-				for (String value : data)
+				cb1.flip();
+				int startOfNumber = 0;
+				for (int i = 0; i < cb1.length(); i++)
 				{
-					dos.writeInt(Integer.parseInt(value));
+					if (cb1.charAt(i) == ',' || cb1.charAt(i) == '\n')
+					{
+						if (columnCount == 0)
+						{
+							if (cb1.charAt(i) == ',')
+							{
+								temp++;
+							}else
+							{
+								columnCount = temp;
+							}
+						}
+						int intToWrite = Integer.parseInt(cb1, startOfNumber, i, 10);
+						dos.writeInt(intToWrite);
+						startOfNumber++;
+					}
 				}
+				cb2.clear();
+				cb2.append(cb1, startOfNumber, cb1.length());
+				CharBuffer tmp = cb2;
+				cb2 = cb1;
+				cb1 = tmp;
 			}
-			
-			names.put((char) letter, (char) letter + extension);
-			letter++;
+			fr.close();
 			dos.close();
-			reader.close();
+			Table t = new Table((char) letter + extension, columnCount);
+			tables.put((char) letter, t);
+			letter++;
 		}
-		return names;
+		return tables;
 	}
 }
