@@ -27,7 +27,8 @@ public class Main
 			BufferedReader[] tableReader = new BufferedReader[tables.length];
 			for (int j = 0; j < tables.length; j++)
 			{
-				tableReader[j] = new BufferedReader(new FileReader(new File(names.get(tables[j].charAt(0)))));
+				tableReader[j] = new BufferedReader(new FileReader(
+						new File(names.get(tables[j].charAt(0)).getPath())));
 			}
 			
 			System.out.println(1 + select);
