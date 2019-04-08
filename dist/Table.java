@@ -24,4 +24,9 @@ public class Table
 	{
 		return columnCount;
 	}
+	
+	public void setPath(String path)
+	{
+		this.path = path;
+	}
 }

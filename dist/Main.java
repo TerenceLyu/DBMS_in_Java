@@ -7,6 +7,7 @@
 import java.io.*;
 import java.nio.CharBuffer;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 public class Main
 {
@@ -25,12 +26,12 @@ public class Main
 			String and = input.nextLine().split(" ", 2)[1];
 			String[] tables = from.split(", ");
 			BufferedReader[] tableReader = new BufferedReader[tables.length];
-			for (int j = 0; j < tables.length; j++)
-			{
-				tableReader[j] = new BufferedReader(new FileReader(
-						new File(names.get(tables[j].charAt(0)).getPath())));
-			}
-			
+//			for (int j = 0; j < tables.length; j++)
+//			{
+//				tableReader[j] = new BufferedReader(new FileReader(
+//						new File(names.get(tables[j].charAt(0)).getPath())));
+//			}
+			Table newT = tableScan(names.get(and.charAt(0)), and);
 			System.out.println(1 + select);
 			System.out.println(2 + from);
 			System.out.println(3 + where);
@@ -92,6 +93,7 @@ public class Main
 				cb1 = tmp;
 			}
 			fr.close();
+			fos.close();
 			dos.close();
 			Table t = new Table((char) letter + extension, columnCount);
 			tables.put((char) letter, t);
@@ -99,4 +101,64 @@ public class Main
 		}
 		return tables;
 	}
+	public static Table tableScan(Table t, String predicate) throws IOException
+	{
+		Scanner scanner = new Scanner(new File(t.getPath()));
+		FileOutputStream fos = new FileOutputStream(t.getPath()+ "_scan" + ".txt");
+		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
+		while (scanner.hasNext())
+		{
+			int[] row = new int[t.getColumnCount()];
+			for (int i = 0; i < t.getColumnCount(); i++)
+			{
+				row[i] = scanner.nextInt();
+			}
+			String[] p = predicate.substring(0,predicate.length()-2).split(" ");
+			int col = Integer.parseInt(p[0].substring(3));
+			char compare = p[2].charAt(0);
+			
+			if (compare == '=')
+			{
+				if (row[col] == Integer.parseInt(p[2]))
+				{
+					for (int i = 0; i < t.getColumnCount(); i++)
+					{
+						dos.writeInt(row[i]);
+					}
+				}
+			}
+			if (compare == '>')
+			{
+				if (row[col] > Integer.parseInt(p[2]))
+				{
+					for (int i = 0; i < t.getColumnCount(); i++)
+					{
+						dos.writeInt(row[i]);
+					}
+				}
+			}
+			if (compare == '<')
+			{
+				if (row[col] < Integer.parseInt(p[2]))
+				{
+					for (int i = 0; i < t.getColumnCount(); i++)
+					{
+						dos.writeInt(row[i]);
+					}
+				}
+			}
+		}
+		fos.close();
+		dos.close();
+		return new Table(t.getPath()+ "_scan" + ".txt", t.getColumnCount());
+	}
 }
+
+
+
+
+
+
+
+
+
