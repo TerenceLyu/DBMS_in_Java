@@ -7,7 +7,6 @@
 import java.io.*;
 import java.nio.CharBuffer;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class Main
 {
@@ -25,25 +24,25 @@ public class Main
 	public static void main(String[] args) throws IOException
 	{
 		HashMap<Character, Table> names = handle_Data_Loading();
-		System.out.println("data loaded");
+//		System.out.println("data loaded");
 		Scanner input = new Scanner(System.in);
 		int numberOfQueries = input.nextInt();
 		for (int i = 0; i < numberOfQueries; i++)
 		{
 			input.nextLine();//skip empty line
-			System.out.println("select: ");
+//			System.out.println("select: ");
 			String select = input.nextLine().split(" ", 2)[1];
-			System.out.println("from: ");
+//			System.out.println("from: ");
 			String from = input.nextLine().split(" ", 2)[1];
-			System.out.println("where: ");
+//			System.out.println("where: ");
 			String where = input.nextLine().split(" ", 2)[1];
-			System.out.println("and: ");
+//			System.out.println("and: ");
 			String and = input.nextLine().split(" ", 2)[1];
 			String[] scans = and.substring(0,and.length()-1).split(" AND ");
-			System.out.println(1 + select);
-			System.out.println(2 + from);
-			System.out.println(3 + where);
-			System.out.println(4 + and);
+//			System.out.println(1 + select);
+//			System.out.println(2 + from);
+//			System.out.println(3 + where);
+//			System.out.println(4 + and);
 			String[] tableNames = from.split(", ");
 			HashMap<Character, Table> tables = new HashMap<>();
 			Table scanned = new Table("X", 0, 0);
@@ -53,9 +52,9 @@ public class Main
 				for (int k = 0; k < scans.length; k++)
 				{
 					if (tableNames[j].charAt(0) == scans[k].charAt(0)){
-						System.out.println("start table scaned");
+//						System.out.println("start table scaned");
 						scanned = tableScan(names.get(scans[k].charAt(0)), scans[k]);
-						System.out.println("finish table scaned");
+//						System.out.println("finish table scaned");
 						tables.put(tableNames[j].charAt(0), scanned);
 					}else
 					{
@@ -64,23 +63,45 @@ public class Main
 				}
 			}
 //			System.out.println(scanned.start('D'));
-			System.out.println("table scaned");
+//			System.out.println("table scaned");
 			String[] joins = where.split(" AND ");
+			LinkedList<String> joinList = new LinkedList<>(Arrays.asList(joins));
+			
+			//0123456789
+			//A.c30 = D.c10
 			Table curr = scanned;
 			Queue<String> joinQueue = new LinkedList<>();
-			for (String j : joins)
+			
+			while (!joinList.isEmpty())
 			{
-				if (j.indexOf(curr.getPath().charAt(5)) > 0)
+				LinkedList<String> thingsToRemove = new LinkedList<>();
+				for (String j : joinList)
 				{
-					joinQueue.add(j);
+					if (j.indexOf(curr.getPath().charAt(5)) >= 0)
+					{
+						joinQueue.add(j);
+						thingsToRemove.add(j);
+					}else
+					{
+						LinkedList<String> thingsToAdd = new LinkedList<>();
+						for (String s : joinQueue)
+						{
+							String[] aj = j.split(" ");
+							if (s.indexOf(aj[0].charAt(0)) >= 0)
+							{
+								thingsToAdd.add(j);
+								thingsToRemove.add(j);
+							}
+							if (s.indexOf(aj[2].charAt(0)) >= 0)
+							{
+								thingsToAdd.add(j);
+								thingsToRemove.add(j);
+							}
+						}
+						joinQueue.addAll(thingsToAdd);
+					}
 				}
-			}
-			for (String j : joins)
-			{
-				if (!joinQueue.contains(j))
-				{
-					joinQueue.add(j);
-				}
+				joinList.removeAll(thingsToRemove);
 			}
 			
 			for (String join : joinQueue)
@@ -89,10 +110,10 @@ public class Main
 				String[] jl = join.split(" ");
 				char nameA = join.charAt(0);
 				char nameB = join.charAt(7);
-				if (curr.getPath().indexOf(nameA) > 0)
+				if (curr.getPath().indexOf(nameA) >= 0)
 				{
 					Table t = tables.get(nameB);
-					if (curr.getPath().indexOf(nameB) > 0)
+					if (curr.getPath().indexOf(nameB) >= 0)
 					{
 						curr = filter(curr, join);
 					}else
@@ -102,7 +123,7 @@ public class Main
 				}else
 				{
 					Table t = tables.get(nameA);
-					if (curr.getPath().indexOf(nameA) > 0)
+					if (curr.getPath().indexOf(nameA) >= 0)
 					{
 						curr = filter(curr, join);
 					}else
@@ -110,21 +131,24 @@ public class Main
 						curr = join(jl[2], jl[0], curr, t);
 					}
 				}
-				
-				System.out.println("table joined");
+//				System.out.println("table joined");
 			}
-			
 			//sum
 			//SUM(D.c0), SUM(D.c4), SUM(C.c1)
 			String[] sums = select.split(", ");
-			sum(curr,sums);
 			
+//			System.out.println("***********");
+			sum(curr, sums);
+//			System.out.println("***********");
 			for (String fileName : fileToDelete)
 			{
 				File f = new File(fileName);
 				f.delete();
 			}
-			
+//			try
+//			{
+//				TimeUnit.MINUTES.sleep(1);
+//			}catch (Exception e){}
 		}
 		for (Table t: names.values())
 		{
@@ -215,6 +239,7 @@ public class Main
 			{
 				if (row[col] == target)
 				{
+//					System.out.println(row[col]);
 					for (int j = 0; j < t.getColumnCount(); j++)
 					{
 						dos.writeInt(row[j]);
@@ -248,7 +273,8 @@ public class Main
 		in.close();
 		dos.close();
 		Table nt = new Table("scan_" + t.getPath(), t.getColumnCount(), rowCount);
-		nt.setIndexMap(t.getIndexMap());
+		HashMap<Character, Integer> im = new HashMap<>(t.getIndexMap());
+		nt.setIndexMap(im);
 //		System.out.println(nt.start('D'));
 		fileToDelete.add(nt.getPath());
 		return nt;
@@ -256,9 +282,9 @@ public class Main
 	public static Table join(String ac, String bc, Table a, Table b) throws IOException
 	{
 		DataInputStream inA = new DataInputStream(new BufferedInputStream(new FileInputStream(a.getPath())));
-		System.out.println(a.getPath() + " join " + b.getPath());
-		System.out.println(a.getPath() + " row: " + a.getRowCount() + ",  col: " + a.getColumnCount());
-		System.out.println(b.getPath() + " row: " + b.getRowCount() + ",  col: " + b.getColumnCount());
+//		System.out.println(a.getPath() + " join " + b.getPath());
+//		System.out.println(a.getPath() + " row: " + a.getRowCount() + ",  col: " + a.getColumnCount());
+//		System.out.println(b.getPath() + " row: " + b.getRowCount() + ",  col: " + b.getColumnCount());
 		String resultName = a.getPath() + "_and_" + b.getPath();
 		FileOutputStream fos = new FileOutputStream(resultName);
 		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
@@ -268,6 +294,7 @@ public class Main
 			//012345678910
 			//A.c1 = B.c0
 			int[] aRow = new int[a.getColumnCount()];
+//			System.out.println(ac + bc);
 			int aCol = a.start(ac.charAt(0)) + Character.getNumericValue(ac.charAt(3));
 			int bCol = b.start(bc.charAt(0)) + Character.getNumericValue(bc.charAt(3));
 			for (int j = 0; j < a.getColumnCount(); j++)
@@ -279,6 +306,7 @@ public class Main
 			{
 				
 				int[] bRow = new int[b.getColumnCount()];
+//				System.out.println(a.getPath()+" : "+aCol+" : "+aRow[aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
 				for (int k = 0; k < b.getColumnCount(); k++)
 				{
 					bRow[k] = inB.readInt();
@@ -286,7 +314,6 @@ public class Main
 				if (aRow[aCol] == bRow[bCol])
 				{
 //					System.out.println(a.getPath()+" : "+aCol+" : "+aRow[aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
-
 //					System.out.println("****"+i);
 					for (int k = 0; k < a.getColumnCount(); k++)
 					{
@@ -312,14 +339,12 @@ public class Main
 		dos.close();
 		Table t = new Table(resultName, a.getColumnCount()+b.getColumnCount(), rowCount);
 		HashMap<Character, Integer> im = new HashMap<>(a.getIndexMap());
-		t.setIndexMap(im);
-		HashMap<Character, Integer> m = b.getIndexMap();
-		for (char c : m.keySet())
+		HashMap<Character, Integer> bm = b.getIndexMap();
+		for (Character key : bm.keySet())
 		{
-			int newIndex = m.get(c) + a.getColumnCount();
-//			System.out.println(c + " , " + newIndex);
-			t.addStart(c, newIndex);
+			im.put(key, bm.get(key) + a.getColumnCount());
 		}
+		t.setIndexMap(im);
 		fileToDelete.add(t.getPath());
 		return t;
 	}
@@ -337,8 +362,8 @@ public class Main
 		String b = p[2];
 		int aCol = t.start(a.charAt(0)) + Integer.parseInt(a.substring(3));
 		int bCol = t.start(b.charAt(0)) + Integer.parseInt(b.substring(3));
-		System.out.println(a+" "+t.start(a.charAt(0))+" "+aCol);
-		System.out.println(b+" "+t.start(b.charAt(0))+" "+bCol);
+//		System.out.println(a+" "+t.start(a.charAt(0))+" "+aCol);
+//		System.out.println(b+" "+t.start(b.charAt(0))+" "+bCol);
 		int rowCount = 0;
 		for (int i = 0; i < t.getRowCount(); i++)
 		{
@@ -351,7 +376,7 @@ public class Main
 			{
 				for (int j = 0; j < t.getColumnCount(); j++)
 				{
-					System.out.println(row[j]);
+//					System.out.println(row[j]);
 					dos.writeInt(row[j]);
 				}
 				rowCount++;
@@ -370,13 +395,14 @@ public class Main
 	{
 		int[] result = new int[sums.length];
 		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
+//		System.out.println(t.getRowCount());
 		for (int i = 0; i < t.getRowCount(); i++)
 		{
 			//0123456789
 			//SUM(D.c0)
 			//SUM(D.c4)
 			//SUM(C.c12)
-			//
+//			System.out.println(t.getColumnCount());
 			for (int j = 0; j < t.getColumnCount(); j++)
 			{
 				int x = in.readInt();
@@ -393,7 +419,10 @@ public class Main
 		}
 		for (int i = 0; i < result.length; i++)
 		{
-			System.out.print(result[i]);
+			if (t.getRowCount() != 0)
+			{
+				System.out.print(result[i]);
+			}
 			if (i == result.length - 1)
 			{
 				System.out.println();
