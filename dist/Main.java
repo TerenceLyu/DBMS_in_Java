@@ -11,6 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Main
 {
+	//..\pa3_data\data\xxxs\A.csv,..\pa3_data\data\xxxs\B.csv,..\pa3_data\data\xxxs\C.csv,..\pa3_data\data\xxxs\D.csv,..\pa3_data\data\xxxs\E.csv
+	//1
+	//SELECT SUM(D.c0), SUM(D.c4), SUM(C.c1)
+	//FROM A, B, C, D
+	//WHERE A.c1 = B.c0 AND A.c3 = D.c0 AND C.c2 = D.c2
+	//AND D.c3 = -9496;
 	public static Queue<String> fileToDelete = new LinkedList<>();
 	public static void main(String[] args) throws IOException
 	{
@@ -25,6 +31,7 @@ public class Main
 			String from = input.nextLine().split(" ", 2)[1];
 			String where = input.nextLine().split(" ", 2)[1];
 			String and = input.nextLine().split(" ", 2)[1];
+			String[] scans = and.substring(0,and.length()-1).split(" AND ");
 			System.out.println(1 + select);
 			System.out.println(2 + from);
 			System.out.println(3 + where);
@@ -35,15 +42,19 @@ public class Main
 			for (int j = 0; j < tableNames.length; j++)
 			{
 				//enforce the last predicate to reduce table size
-				if (tableNames[j].charAt(0) == and.charAt(0)){
-					System.out.println("start table scaned");
-					scanned = tableScan(names.get(and.charAt(0)), and);
-					System.out.println("finish table scaned");
-					tables.put(tableNames[j].charAt(0), scanned);
-				}else
+				for (int k = 0; k < scans.length; k++)
 				{
-					tables.put(tableNames[j].charAt(0), names.get(tableNames[j].charAt(0)));
+					if (tableNames[j].charAt(0) == scans[k].charAt(0)){
+						System.out.println("start table scaned");
+						scanned = tableScan(names.get(scans[k].charAt(0)), scans[k]);
+						System.out.println("finish table scaned");
+						tables.put(tableNames[j].charAt(0), scanned);
+					}else
+					{
+						tables.put(tableNames[j].charAt(0), names.get(tableNames[j].charAt(0)));
+					}
 				}
+				
 				
 			}
 			System.out.println(scanned.start('D'));
@@ -98,7 +109,8 @@ public class Main
 			}
 			
 			//sum
-			
+			//SUM(D.c0), SUM(D.c4), SUM(C.c1)
+			String[] sums = select.split(", ");
 			
 			DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(curr.getPath())));
 			int sum1 = 0;
@@ -205,7 +217,11 @@ public class Main
 		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
 		FileOutputStream fos = new FileOutputStream("scan_" + t.getPath());
 		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
-		String[] p = predicate.substring(0,predicate.length()-1).split(" ");
+		//A.c14 < -8000
+		String[] p = predicate.split(" ");
+		//A.c14
+		//<
+		//-8000
 		char compare = p[1].charAt(0);
 		int target = Integer.parseInt(p[2]);
 		int col = Integer.parseInt(p[0].substring(3));
@@ -363,6 +379,44 @@ public class Main
 		t.setPath("scan_" + t.getPath());
 		fileToDelete.add(t.getPath());
 		return t;
+	}
+	public static void sum(Table t, String[] sums) throws IOException
+	{
+		int[] result = new int[sums.length];
+		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
+		for (int i = 0; i < t.getRowCount(); i++)
+		{
+			//0123456789
+			//SUM(D.c0)
+			//SUM(D.c4)
+			//SUM(C.c12)
+			//
+			for (int j = 0; j < t.getColumnCount(); j++)
+			{
+				int x = in.readInt();
+				for (int k = 0; k < sums.length; k++)
+				{
+					String sum = sums[k];
+					if (j == t.start(sum.charAt(4))
+							+ Integer.parseInt(sum.substring(7, sum.length()-1)))
+					{
+						result[k] = result[k] + x;
+					}
+				}
+			}
+		}
+		for (int i = 0; i < result.length; i++)
+		{
+			System.out.print(result[i]);
+			if (i == result.length - 1)
+			{
+				System.out.println();
+			}else
+			{
+				System.out.print(",");
+			}
+		}
+		
 	}
 }
 
