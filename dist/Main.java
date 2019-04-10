@@ -27,6 +27,14 @@ public class Main
 //		System.out.println("data loaded");
 		Scanner input = new Scanner(System.in);
 		int numberOfQueries = input.nextInt();
+//		for (int i = 0; i < 10; i++)
+//		{
+//			input.nextLine();
+//			input.nextLine();
+//			input.nextLine();
+//			input.nextLine();
+//			input.nextLine();
+//		}
 		for (int i = 0; i < numberOfQueries; i++)
 		{
 			input.nextLine();//skip empty line
@@ -39,10 +47,10 @@ public class Main
 //			System.out.println("and: ");
 			String and = input.nextLine().split(" ", 2)[1];
 			String[] scans = and.substring(0,and.length()-1).split(" AND ");
-//			System.out.println(1 + select);
-//			System.out.println(2 + from);
-//			System.out.println(3 + where);
-//			System.out.println(4 + and);
+			System.out.println(1 + select);
+			System.out.println(2 + from);
+			System.out.println(3 + where);
+			System.out.println(4 + and);
 			String[] tableNames = from.split(", ");
 			HashMap<Character, Table> tables = new HashMap<>();
 			Table scanned = new Table("X", 0, 0);
@@ -140,21 +148,21 @@ public class Main
 //			System.out.println("***********");
 			sum(curr, sums);
 //			System.out.println("***********");
-			for (String fileName : fileToDelete)
-			{
-				File f = new File(fileName);
-				f.delete();
-			}
+//			for (String fileName : fileToDelete)
+//			{
+//				File f = new File(fileName);
+//				f.delete();
+//			}
 //			try
 //			{
 //				TimeUnit.MINUTES.sleep(1);
 //			}catch (Exception e){}
 		}
-		for (Table t: names.values())
-		{
-			File f = new File(t.getPath());
-			f.delete();
-		}
+//		for (Table t: names.values())
+//		{
+//			File f = new File(t.getPath());
+//			f.delete();
+//		}
 		
 	}
 	public static HashMap<Character, Table> handle_Data_Loading() throws IOException
@@ -282,55 +290,50 @@ public class Main
 	public static Table join(String ac, String bc, Table a, Table b) throws IOException
 	{
 		DataInputStream inA = new DataInputStream(new BufferedInputStream(new FileInputStream(a.getPath())));
-//		System.out.println(a.getPath() + " join " + b.getPath());
-//		System.out.println(a.getPath() + " row: " + a.getRowCount() + ",  col: " + a.getColumnCount());
-//		System.out.println(b.getPath() + " row: " + b.getRowCount() + ",  col: " + b.getColumnCount());
 		String resultName = a.getPath() + "_and_" + b.getPath();
 		FileOutputStream fos = new FileOutputStream(resultName);
 		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
 		int rowCount = 0;
+		int aCol = a.start(ac.charAt(0)) + Character.getNumericValue(ac.charAt(3));
+		int bCol = b.start(bc.charAt(0)) + Character.getNumericValue(bc.charAt(3));
 		for (int i = 0; i < a.getRowCount(); i++)
 		{
 			//012345678910
 			//A.c1 = B.c0
-			int[] aRow = new int[a.getColumnCount()];
-//			System.out.println(ac + bc);
-			int aCol = a.start(ac.charAt(0)) + Character.getNumericValue(ac.charAt(3));
-			int bCol = b.start(bc.charAt(0)) + Character.getNumericValue(bc.charAt(3));
-			for (int j = 0; j < a.getColumnCount(); j++)
+			int[][] aBlock = new int[500][a.getColumnCount()];
+			int aBlockRow = Math.min(a.getRowCount()-i, 500);
+			for (int j = 0; j < aBlockRow; j++)
 			{
-				aRow[j] = inA.readInt();
+				for (int k = 0; k < a.getColumnCount(); k++)
+				{
+					aBlock[j][k] = inA.readInt();
+					i++;
+				}
 			}
 			DataInputStream inB = new DataInputStream(new BufferedInputStream(new FileInputStream(b.getPath())));
 			for (int j = 0; j < b.getRowCount(); j++)
 			{
-				
 				int[] bRow = new int[b.getColumnCount()];
 //				System.out.println(a.getPath()+" : "+aCol+" : "+aRow[aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
 				for (int k = 0; k < b.getColumnCount(); k++)
 				{
 					bRow[k] = inB.readInt();
 				}
-				if (aRow[aCol] == bRow[bCol])
+				for (int k = 0; k < aBlockRow; k++)
 				{
-//					System.out.println(a.getPath()+" : "+aCol+" : "+aRow[aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
-//					System.out.println("****"+i);
-					for (int k = 0; k < a.getColumnCount(); k++)
+					if (aBlock[k][aCol] == bRow[bCol])
 					{
-//						System.out.print(aRow[k] + ",");
-						dos.writeInt(aRow[k]);
+						for (int l = 0; l < a.getColumnCount(); l++)
+						{
+							dos.writeInt(aBlock[k][l]);
+						}
+						for (int l = 0; l < b.getColumnCount(); l++)
+						{
+							dos.writeInt(bRow[l]);
+						}
+						rowCount++;
 					}
-					for (int k = 0; k < b.getColumnCount(); k++)
-					{
-//						System.out.print(bRow[k] + ",");
-						dos.writeInt(bRow[k]);
-					}
-//					System.out.println();
-					rowCount++;
-//					System.out.println(aRow[aCol] + ", " + bRow[bCol]);
-//					System.out.println(rowCount);
 				}
-				
 			}
 			inB.close();
 			
