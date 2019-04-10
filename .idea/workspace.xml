@@ -6,7 +6,7 @@
       <change beforePath="$PROJECT_DIR$/dist/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/proc_stderr" beforeDir="false" afterPath="$PROJECT_DIR$/dist/proc_stderr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/proc_stdout" beforeDir="false" afterPath="$PROJECT_DIR$/dist/proc_stdout" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/run_with_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/dist/run_with_data.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,12 +30,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-55">
-              <caret line="407" column="32" selection-start-line="407" selection-start-column="32" selection-end-line="407" selection-end-column="32" />
+            <state relative-caret-position="337">
+              <caret line="136" column="55" selection-start-line="136" selection-start-column="55" selection-end-line="136" selection-end-column="55" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="method#join#0;class#Main#0" expanded="true" />
+                <element signature="e#4040#4114#0" />
+                <element signature="e#11604#12026#1" />
+                <element signature="e#12071#12256#1" />
+                <element signature="method#cost#0;class#Main#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,10 +47,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+            <state relative-caret-position="1051">
+              <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
               <folding>
-                <element signature="method#toString#0;class#Table#0" expanded="true" />
+                <element signature="method#Table#1;class#Table#0" expanded="true" />
+                <element signature="e#872#873#0" expanded="true" />
+                <element signature="e#901#902#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+            <state relative-caret-position="93">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -230,12 +235,12 @@
       <workItem from="1554831888759" duration="188000" />
       <workItem from="1554832170119" duration="2493000" />
       <workItem from="1554837638307" duration="8890000" />
-      <workItem from="1554911280320" duration="9649000" />
+      <workItem from="1554911280320" duration="19840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70841000" />
+    <option name="totallyTimeSpent" value="81032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
@@ -337,10 +342,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+        <state relative-caret-position="1051">
+          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
           <folding>
-            <element signature="method#toString#0;class#Table#0" expanded="true" />
+            <element signature="method#Table#1;class#Table#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -354,19 +361,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="93">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-55">
-          <caret line="407" column="32" selection-start-line="407" selection-start-column="32" selection-end-line="407" selection-end-column="32" />
+        <state relative-caret-position="337">
+          <caret line="136" column="55" selection-start-line="136" selection-start-column="55" selection-end-line="136" selection-end-column="55" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="method#join#0;class#Main#0" expanded="true" />
+            <element signature="e#4040#4114#0" />
+            <element signature="e#11604#12026#1" />
+            <element signature="e#12071#12256#1" />
+            <element signature="method#cost#0;class#Main#0" expanded="true" />
           </folding>
         </state>
       </provider>
