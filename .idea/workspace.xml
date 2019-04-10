@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7d961ac-d90c-43f2-9c96-60316b626108" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/compile.sh" beforeDir="false" afterPath="$PROJECT_DIR$/dist/compile.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/proc_stdout" beforeDir="false" afterPath="$PROJECT_DIR$/dist/proc_stdout" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/proc_stderr" beforeDir="false" afterPath="$PROJECT_DIR$/dist/proc_stderr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/run_with_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/dist/run_with_data.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,11 +30,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-234">
-              <caret line="160" column="8" selection-start-line="160" selection-start-column="8" selection-end-line="164" selection-end-column="9" />
+            <state relative-caret-position="-55">
+              <caret line="407" column="32" selection-start-line="407" selection-start-column="32" selection-end-line="407" selection-end-column="32" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="method#join#0;class#Main#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/Table.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+              <folding>
+                <element signature="method#toString#0;class#Table#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,7 +56,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/grade.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state relative-caret-position="-1209">
               <caret line="17" column="17" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="17" />
             </state>
           </provider>
@@ -52,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+            <state relative-caret-position="62">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -217,12 +230,12 @@
       <workItem from="1554831888759" duration="188000" />
       <workItem from="1554832170119" duration="2493000" />
       <workItem from="1554837638307" duration="8890000" />
-      <workItem from="1554911280320" duration="3962000" />
+      <workItem from="1554911280320" duration="9649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65154000" />
+    <option name="totallyTimeSpent" value="70841000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
@@ -290,13 +303,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/run.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="35">
@@ -306,13 +312,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/proc_stderr">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/grade.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/xxxs/queries.sql">
       <provider selected="true" editor-type-id="text-editor">
@@ -336,20 +335,38 @@
     <entry file="file://$PROJECT_DIR$/dist/proc_stdout">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+          <folding>
+            <element signature="method#toString#0;class#Table#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/grade.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1209">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="62">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-234">
-          <caret line="160" column="8" selection-start-line="160" selection-start-column="8" selection-end-line="164" selection-end-column="9" />
+        <state relative-caret-position="-55">
+          <caret line="407" column="32" selection-start-line="407" selection-start-column="32" selection-end-line="407" selection-end-column="32" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="method#join#0;class#Main#0" expanded="true" />
           </folding>
         </state>
       </provider>

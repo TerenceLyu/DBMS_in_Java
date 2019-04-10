@@ -47,10 +47,10 @@ public class Main
 //			System.out.println("and: ");
 			String and = input.nextLine().split(" ", 2)[1];
 			String[] scans = and.substring(0,and.length()-1).split(" AND ");
-			System.out.println(1 + select);
-			System.out.println(2 + from);
-			System.out.println(3 + where);
-			System.out.println(4 + and);
+//			System.out.println(1 + select);
+//			System.out.println(2 + from);
+//			System.out.println(3 + where);
+//			System.out.println(4 + and);
 			String[] tableNames = from.split(", ");
 			HashMap<Character, Table> tables = new HashMap<>();
 			Table scanned = new Table("X", 0, 0);
@@ -261,6 +261,7 @@ public class Main
 				{
 					for (int j = 0; j < t.getColumnCount(); j++)
 					{
+						
 						dos.writeInt(row[j]);
 					}
 					rowCount++;
@@ -293,36 +294,44 @@ public class Main
 		String resultName = a.getPath() + "_and_" + b.getPath();
 		FileOutputStream fos = new FileOutputStream(resultName);
 		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
+//		System.out.println(ac+" join "+bc);
+//		System.out.println(a.toString());
+//		System.out.println(b.toString());
 		int rowCount = 0;
 		int aCol = a.start(ac.charAt(0)) + Character.getNumericValue(ac.charAt(3));
 		int bCol = b.start(bc.charAt(0)) + Character.getNumericValue(bc.charAt(3));
-		for (int i = 0; i < a.getRowCount(); i++)
+		for (int i = 0; i < a.getRowCount();)
 		{
 			//012345678910
 			//A.c1 = B.c0
-			int[][] aBlock = new int[500][a.getColumnCount()];
-			int aBlockRow = Math.min(a.getRowCount()-i, 500);
+			int[][] aBlock = new int[2000][a.getColumnCount()];
+			int aBlockRow = Math.min(a.getRowCount()-i, 2000);
+//			System.out.println(aBlockRow);
 			for (int j = 0; j < aBlockRow; j++)
 			{
 				for (int k = 0; k < a.getColumnCount(); k++)
 				{
 					aBlock[j][k] = inA.readInt();
-					i++;
 				}
+				i++;
 			}
 			DataInputStream inB = new DataInputStream(new BufferedInputStream(new FileInputStream(b.getPath())));
 			for (int j = 0; j < b.getRowCount(); j++)
 			{
 				int[] bRow = new int[b.getColumnCount()];
-//				System.out.println(a.getPath()+" : "+aCol+" : "+aRow[aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
 				for (int k = 0; k < b.getColumnCount(); k++)
 				{
 					bRow[k] = inB.readInt();
 				}
 				for (int k = 0; k < aBlockRow; k++)
 				{
+					
 					if (aBlock[k][aCol] == bRow[bCol])
 					{
+//						if (a.getPath().equals("scan_D_and_A"))
+//						{
+//							System.out.println(a.getPath()+" : "+aCol+" : "+aBlock[k][aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
+//						}
 						for (int l = 0; l < a.getColumnCount(); l++)
 						{
 							dos.writeInt(aBlock[k][l]);
@@ -396,7 +405,7 @@ public class Main
 	}
 	public static void sum(Table t, String[] sums) throws IOException
 	{
-		int[] result = new int[sums.length];
+		long[] result = new long[sums.length];
 		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
 //		System.out.println(t.getRowCount());
 		for (int i = 0; i < t.getRowCount(); i++)

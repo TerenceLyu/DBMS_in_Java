@@ -24,6 +24,16 @@ public class Table
 		indexMap.put(path.charAt(0), 0);
 	}
 	
+	@Override
+	public String toString()
+	{
+		return "Table{" +
+				"path='" + path + '\'' +
+				", columnCount=" + columnCount +
+				", rowCount=" + rowCount +
+				'}';
+	}
+	
 	public String getPath()
 	{
 		return path;
@@ -58,10 +68,12 @@ public class Table
 	{
 		return indexMap.get(x);
 	}
+	
 	public void addStart(char x, int y)
 	{
 		indexMap.put(x, y);
 	}
+	
 	public void setIndexMap(HashMap<Character, Integer> indexMap)
 	{
 		this.indexMap = indexMap;
