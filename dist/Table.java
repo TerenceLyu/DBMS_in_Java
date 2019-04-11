@@ -12,13 +12,18 @@ public class Table
 	private int columnCount;
 	private int rowCount;
 	private HashMap<Character, Integer> indexMap = new HashMap<>();
-	private int[] numberOfUnique;
+//	private int[] numberOfUnique;
+	
+	public Table()
+	{
+	
+	}
 	public Table(String path, int columnCount, int rowCount)
 	{
 		this.path = path;
 		this.columnCount = columnCount;
 		this.rowCount = rowCount;
-		this.numberOfUnique = new int[columnCount];
+//		this.numberOfUnique = new int[columnCount];
 		indexMap.put(path.charAt(0), 0);
 	}
 	
@@ -62,15 +67,15 @@ public class Table
 		this.rowCount = rowCount;
 	}
 	
-	public void setNumberOfUnique(int[] numberOfUnique)
-	{
-		this.numberOfUnique = numberOfUnique;
-	}
-	
-	public int[] getNumberOfUnique()
-	{
-		return numberOfUnique;
-	}
+//	public void setNumberOfUnique(int[] numberOfUnique)
+//	{
+//		this.numberOfUnique = numberOfUnique;
+//	}
+//
+//	public int[] getNumberOfUnique()
+//	{
+//		return numberOfUnique;
+//	}
 	
 	public int start(char x)
 	{

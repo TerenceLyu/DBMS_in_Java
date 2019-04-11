@@ -30,15 +30,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="136" column="55" selection-start-line="136" selection-start-column="55" selection-end-line="136" selection-end-column="55" />
+            <state relative-caret-position="1890">
+              <caret line="651" column="62" selection-start-line="651" selection-start-column="62" selection-end-line="651" selection-end-column="62" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#4040#4114#0" />
-                <element signature="e#11604#12026#1" />
-                <element signature="e#12071#12256#1" />
-                <element signature="method#cost#0;class#Main#0" expanded="true" />
+                <element signature="method#main#0;class#Main#0" />
+                <element signature="method#handle_Data_Loading#0;class#Main#0" />
+                <element signature="method#tableScan#0;class#Main#0" />
+                <element signature="method#leftDeepJoin#0;class#Main#0" />
+                <element signature="method#join#0;class#Main#0" />
+                <element signature="method#doubleJoin#0;class#Main#0" />
+                <element signature="method#sum#0;class#Main#0" />
               </folding>
             </state>
           </provider>
@@ -47,13 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1051">
-              <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
-              <folding>
-                <element signature="method#Table#1;class#Table#0" expanded="true" />
-                <element signature="e#872#873#0" expanded="true" />
-                <element signature="e#901#902#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="526">
+              <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -61,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/grade.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1209">
+            <state relative-caret-position="420">
               <caret line="17" column="17" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="17" />
             </state>
           </provider>
@@ -70,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="595">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -95,8 +93,8 @@
         <option value="$PROJECT_DIR$/dist/Triple.java" />
         <option value="$PROJECT_DIR$/dist/compile.sh" />
         <option value="$PROJECT_DIR$/dist/run.sh" />
-        <option value="$PROJECT_DIR$/dist/Table.java" />
         <option value="$PROJECT_DIR$/dist/run_with_data.py" />
+        <option value="$PROJECT_DIR$/dist/Table.java" />
         <option value="$PROJECT_DIR$/dist/Main.java" />
       </list>
     </option>
@@ -112,7 +110,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -129,7 +127,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -236,17 +234,18 @@
       <workItem from="1554832170119" duration="2493000" />
       <workItem from="1554837638307" duration="8890000" />
       <workItem from="1554911280320" duration="19840000" />
+      <workItem from="1554940606483" duration="12027000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81032000" />
+    <option name="totallyTimeSpent" value="93059000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11615834" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15301205" />
       <window_info id="Nl-Palette" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -340,43 +339,48 @@
     <entry file="file://$PROJECT_DIR$/dist/proc_stdout">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/Table.java">
+    <entry file="file://$PROJECT_DIR$/dist/grade.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1051">
-          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
-          <folding>
-            <element signature="method#Table#1;class#Table#0" expanded="true" />
-            <element signature="e#872#873#0" expanded="true" />
-            <element signature="e#901#902#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="420">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/grade.py">
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/io/PrintStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1209">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="17" />
+        <state relative-caret-position="253">
+          <caret line="879" column="16" selection-start-line="879" selection-start-column="16" selection-end-line="879" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="595">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="136" column="55" selection-start-line="136" selection-start-column="55" selection-end-line="136" selection-end-column="55" />
+        <state relative-caret-position="1890">
+          <caret line="651" column="62" selection-start-line="651" selection-start-column="62" selection-end-line="651" selection-end-column="62" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#4040#4114#0" />
-            <element signature="e#11604#12026#1" />
-            <element signature="e#12071#12256#1" />
-            <element signature="method#cost#0;class#Main#0" expanded="true" />
+            <element signature="method#main#0;class#Main#0" />
+            <element signature="method#handle_Data_Loading#0;class#Main#0" />
+            <element signature="method#tableScan#0;class#Main#0" />
+            <element signature="method#leftDeepJoin#0;class#Main#0" />
+            <element signature="method#join#0;class#Main#0" />
+            <element signature="method#doubleJoin#0;class#Main#0" />
+            <element signature="method#sum#0;class#Main#0" />
           </folding>
         </state>
       </provider>
