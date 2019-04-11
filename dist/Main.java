@@ -77,7 +77,6 @@ public class Main
 			ArrayList<String> joinArray = new ArrayList<>(Arrays.asList(joins));
 			Table curr = scanned;
 			Table[] firstJoin = new Table[2];
-			String[] joinPredicate = new String[2];
 			String joinToRemove = "";
 			double minCost = -1;
 			for (Table t1 : tables.values())
@@ -99,8 +98,6 @@ public class Main
 									minCost = cost;
 									firstJoin[0] = t1;
 									firstJoin[1] = t2;
-									joinPredicate[0] = js[0];
-									joinPredicate[1] = js[2];
 									joinToRemove = join;
 								}
 							}
@@ -112,8 +109,6 @@ public class Main
 									minCost = cost;
 									firstJoin[0] = t2;
 									firstJoin[1] = t1;
-									joinPredicate[1] = js[2];
-									joinPredicate[0] = js[0];
 									joinToRemove = join;
 								}
 							}
@@ -123,7 +118,7 @@ public class Main
 				}
 			}
 //			System.out.println(Arrays.toString(firstJoin));
-			Table joinResult = join(joinPredicate[0], joinPredicate[1], firstJoin[0], firstJoin[1]);
+			Table joinResult = join(firstJoin[0], firstJoin[1], joinToRemove);
 			tables.values().remove(firstJoin[0]);
 			tables.values().remove(firstJoin[1]);
 			joinArray.remove(joinToRemove);
@@ -316,8 +311,8 @@ public class Main
 		{
 			//find a table to join with t
 			double minCost = -1;
-			String completedJoin = "";
 			Table target = new Table();
+			String joinToDo = "";
 			for (String join : joinArray)
 			{
 				String[] js = join.split(" ");
@@ -334,7 +329,7 @@ public class Main
 					{
 						minCost = cost;
 						target = temp;
-						completedJoin = join;
+						joinToDo = join;
 					}
 				}
 				if (t.getPath().indexOf(nameB)>=0)
@@ -346,15 +341,16 @@ public class Main
 					{
 						minCost = cost;
 						target = temp;
-						completedJoin = join;
+						joinToDo = join;
 					}
 				}
 			}
 //			System.out.println(completedJoin);
-			joinArray.remove(completedJoin);
+			joinArray.remove(joinToDo);
 			tables.values().remove(target);
+			t = join(t, target, joinToDo);
 			//check for double join
-			ArrayList<String> extraJoin = new ArrayList<>();
+			ArrayList<String> joinToRemove = new ArrayList<>();
 			for (String join : joinArray)
 			{
 				String[] js = join.split(" ");
@@ -363,132 +359,150 @@ public class Main
 				if (t.getPath().indexOf(nameA)>=0 && target.getPath().indexOf(nameB)>=0)
 				{
 //					System.out.println(join);
-					extraJoin.add(join);
+					t = filter(t, join);
+					joinToRemove.add(join);
 				}
 				if (t.getPath().indexOf(nameB)>=0 && target.getPath().indexOf(nameA)>=0)
 				{
 //					System.out.println(join);
-					extraJoin.add(join);
+					t = filter(t, join);
+					joinToRemove.add(join);
 				}
 			}
-			joinArray.removeAll(extraJoin);
-			if (extraJoin.size() != 0)
-			{
-				//if yes, compute double join
-				extraJoin.add(completedJoin);
-				t = doubleJoin(t, target, extraJoin);
-				
-			}else
-			{
-				//else, compute join
-				String[] ja = completedJoin.split(" = ");
-//				System.out.println(Arrays.toString(ja));
-				if (t.getPath().indexOf(ja[0].charAt(0))>=0)
-				{
-					t = join(ja[0], ja[1], t, target);
-				}else
-				{
-					t = join(ja[1], ja[0], t, target);
-				}
-			}
+			joinArray.removeAll(joinToRemove);
 		}
 		return t;
 	}
-	public static Table join(String ac, String bc, Table a, Table b) throws IOException
-	{
-		DataInputStream inA = new DataInputStream(new BufferedInputStream(new FileInputStream(a.getPath())));
-		String resultName = a.getPath() + "_and_" + b.getPath();
-		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(resultName)));
-//		System.out.println(ac+" join "+bc);
-//		System.out.println(a.toString());
-//		System.out.println(b.toString());
-//		ArrayList<ArrayList<Integer>> diffNum = new ArrayList<>();
-//		for (int i = 0; i < a.getColumnCount()+b.getColumnCount(); i++)
+//	public static Table join(String ac, String bc, Table a, Table b) throws IOException
+//	{
+//		DataInputStream inA = new DataInputStream(new BufferedInputStream(new FileInputStream(a.getPath())));
+//		String resultName = a.getPath() + "_and_" + b.getPath();
+//		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(resultName)));
+////		System.out.println(ac+" join "+bc);
+////		System.out.println(a.toString());
+////		System.out.println(b.toString());
+////		ArrayList<ArrayList<Integer>> diffNum = new ArrayList<>();
+////		for (int i = 0; i < a.getColumnCount()+b.getColumnCount(); i++)
+////		{
+////			diffNum.add(new ArrayList<>());
+////		}
+//		int rowCount = 0;
+//		int aCol = a.start(ac.charAt(0)) + Character.getNumericValue(ac.charAt(3));
+//		int bCol = b.start(bc.charAt(0)) + Character.getNumericValue(bc.charAt(3));
+//		for (int i = 0; i < a.getRowCount();)
 //		{
-//			diffNum.add(new ArrayList<>());
-//		}
-		int rowCount = 0;
-		int aCol = a.start(ac.charAt(0)) + Character.getNumericValue(ac.charAt(3));
-		int bCol = b.start(bc.charAt(0)) + Character.getNumericValue(bc.charAt(3));
-		for (int i = 0; i < a.getRowCount();)
-		{
-			//012345678910
-			//A.c1 = B.c0
-			int aBlockRow = Math.min(a.getRowCount()-i, 5000);
-			int[][] aBlock = new int[aBlockRow][a.getColumnCount()];
-//			System.out.println(aBlockRow);
-			for (int j = 0; j < aBlockRow; j++)
-			{
-				for (int k = 0; k < a.getColumnCount(); k++)
-				{
-					aBlock[j][k] = inA.readInt();
-				}
-				i++;
-			}
-			DataInputStream inB = new DataInputStream(new BufferedInputStream(new FileInputStream(b.getPath())));
-			for (int j = 0; j < b.getRowCount(); j++)
-			{
-				int[] bRow = new int[b.getColumnCount()];
-				for (int k = 0; k < b.getColumnCount(); k++)
-				{
-					bRow[k] = inB.readInt();
-				}
-				for (int k = 0; k < aBlockRow; k++)
-				{
-					
-					if (aBlock[k][aCol] == bRow[bCol])
-					{
-//						if (a.getPath().equals("scan_D_and_A"))
+//			//012345678910
+//			//A.c1 = B.c0
+//			int aBlockRow = Math.min(a.getRowCount()-i, 5000);
+//			int[][] aBlock = new int[aBlockRow][a.getColumnCount()];
+////			System.out.println(aBlockRow);
+//			for (int j = 0; j < aBlockRow; j++)
+//			{
+//				for (int k = 0; k < a.getColumnCount(); k++)
+//				{
+//					aBlock[j][k] = inA.readInt();
+//				}
+//				i++;
+//			}
+//			DataInputStream inB = new DataInputStream(new BufferedInputStream(new FileInputStream(b.getPath())));
+//			for (int j = 0; j < b.getRowCount(); j++)
+//			{
+//				int[] bRow = new int[b.getColumnCount()];
+//				for (int k = 0; k < b.getColumnCount(); k++)
+//				{
+//					bRow[k] = inB.readInt();
+//				}
+//				for (int k = 0; k < aBlockRow; k++)
+//				{
+//
+//					if (aBlock[k][aCol] == bRow[bCol])
+//					{
+////						if (a.getPath().equals("scan_D_and_A"))
+////						{
+////							System.out.println(a.getPath()+" : "+aCol+" : "+aBlock[k][aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
+////						}
+//						for (int l = 0; l < a.getColumnCount(); l++)
 //						{
-//							System.out.println(a.getPath()+" : "+aCol+" : "+aBlock[k][aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
+////							if (!diffNum.get(l).contains(aBlock[k][l]))
+////							{
+////								diffNum.get(l).add(aBlock[k][l]);
+////							}
+//							dos.writeInt(aBlock[k][l]);
 //						}
-						for (int l = 0; l < a.getColumnCount(); l++)
-						{
-//							if (!diffNum.get(l).contains(aBlock[k][l]))
-//							{
-//								diffNum.get(l).add(aBlock[k][l]);
-//							}
-							dos.writeInt(aBlock[k][l]);
-						}
-						for (int l = 0; l < b.getColumnCount(); l++)
-						{
-//							if (!diffNum.get(a.getColumnCount()+l).contains(bRow[l]))
-//							{
-//								diffNum.get(a.getColumnCount()+l).add(bRow[l]);
-//							}
-							dos.writeInt(bRow[l]);
-						}
-						rowCount++;
-					}
-				}
-			}
-			inB.close();
-			
-		}
-		inA.close();
-		dos.close();
-		Table t = new Table(resultName, a.getColumnCount()+b.getColumnCount(), rowCount);
-//		int[] numberOfUnique = new int[t.getColumnCount()];
-//		for (int i = 0; i < numberOfUnique.length; i++)
-//		{
-//			numberOfUnique[i] = diffNum.get(i).size();
+//						for (int l = 0; l < b.getColumnCount(); l++)
+//						{
+////							if (!diffNum.get(a.getColumnCount()+l).contains(bRow[l]))
+////							{
+////								diffNum.get(a.getColumnCount()+l).add(bRow[l]);
+////							}
+//							dos.writeInt(bRow[l]);
+//						}
+//						rowCount++;
+//					}
+//				}
+//			}
+//			inB.close();
+//
 //		}
-//		t.setNumberOfUnique(numberOfUnique);
-		HashMap<Character, Integer> im = new HashMap<>(a.getIndexMap());
-		HashMap<Character, Integer> bm = b.getIndexMap();
-		for (Character key : bm.keySet())
+//		inA.close();
+//		dos.close();
+//		Table t = new Table(resultName, a.getColumnCount()+b.getColumnCount(), rowCount);
+////		int[] numberOfUnique = new int[t.getColumnCount()];
+////		for (int i = 0; i < numberOfUnique.length; i++)
+////		{
+////			numberOfUnique[i] = diffNum.get(i).size();
+////		}
+////		t.setNumberOfUnique(numberOfUnique);
+//		HashMap<Character, Integer> im = new HashMap<>(a.getIndexMap());
+//		HashMap<Character, Integer> bm = b.getIndexMap();
+//		for (Character key : bm.keySet())
+//		{
+//			im.put(key, bm.get(key) + a.getColumnCount());
+//		}
+//		t.setIndexMap(im);
+//		fileToDelete.add(t.getPath());
+//		return t;
+//	}
+	public static Table filter(Table t, String preducate) throws IOException
+	{
+		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
+		String fileName = "scan_" + t.getPath();
+		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
+		String[] p = preducate.split(" = ");
+		//A.c45
+		int rowCount = 0;
+		int[] row = new int[t.getColumnCount()];
+		int aCol = t.start(p[0].charAt(0)) + Integer.parseInt(p[0].substring(3));
+		int bCol = t.start(p[1].charAt(0)) + Integer.parseInt(p[1].substring(3));
+		for (int i = 0; i < t.getRowCount(); i++)
 		{
-			im.put(key, bm.get(key) + a.getColumnCount());
+			for (int j = 0; j < t.getColumnCount(); j++)
+			{
+				row[j] = in.readInt();
+			}
+			if (row[aCol] == row[bCol])
+			{
+				for (int j = 0; j < t.getColumnCount(); j++)
+				{
+					dos.writeInt(row[j]);
+				}
+				rowCount++;
+			}
 		}
-		t.setIndexMap(im);
-		fileToDelete.add(t.getPath());
-		return t;
+		in.close();
+		dos.close();
+		Table nt = new Table(fileName, t.getColumnCount(), rowCount);
+		nt.setIndexMap(t.getIndexMap());
+		fileToDelete.add(nt.getPath());
+		return nt;
 	}
-	public static Table doubleJoin(Table a, Table b, ArrayList<String> extra) throws IOException
+	public static Table join(Table a, Table b, String predicate) throws IOException
 	{
 		DataInputStream inA = new DataInputStream(new BufferedInputStream(new FileInputStream(a.getPath())));
 		String resultName = a.getPath() + "_and_" + b.getPath();
 //		System.out.println(a.getPath()+" join "+b.getPath());
+//		System.out.println(a.toString());
+//		System.out.println(b.toString());
 		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(resultName)));
 //		ArrayList<ArrayList<Integer>> diffNum = new ArrayList<>();
 //		for (int i = 0; i < a.getColumnCount()+b.getColumnCount(); i++)
@@ -496,23 +510,48 @@ public class Main
 //			diffNum.add(new ArrayList<>());
 //		}
 		int rowCount = 0;
-		String[][] predicates = new String[extra.size()][2];
-		for (int i = 0; i < extra.size(); i++)
+		String[] p = predicate.split(" = ");
+		
+		
+		
+		int aCol, bCol;
+		if (a.getPath().indexOf(p[0].charAt(0))>=0)
 		{
-			predicates[i] = extra.get(i).split(" = ");
+			aCol = a.start(p[0].charAt(0)) + Integer.parseInt(p[0].substring(3));
+			bCol = b.start(p[1].charAt(0)) + Integer.parseInt(p[1].substring(3));
+		}else
+		{
+			aCol = a.start(p[1].charAt(0)) + Integer.parseInt(p[1].substring(3));
+			bCol = b.start(p[0].charAt(0)) + Integer.parseInt(p[0].substring(3));
 		}
+		
+//		System.out.println(predicate);
+//		System.out.println(p[0].charAt(0)+" "+aCol+" "+p[1].charAt(0)+" "+bCol);
+		
 		for (int i = 0; i < a.getRowCount();)
 		{
 			//012345678910
 			//A.c1 = B.c0
-			int aBlockRow = Math.min(a.getRowCount()-i, 5000);
-			int[][] aBlock = new int[aBlockRow][a.getColumnCount()];
+			int aBlockRow = Math.min(a.getRowCount()-i, 1000);
+			HashMap<Integer, ArrayList<int[]>> hashBlock = new HashMap<>();
 //			System.out.println(aBlockRow);
+			
 			for (int j = 0; j < aBlockRow; j++)
 			{
+				int[] aRow = new int[a.getColumnCount()];
 				for (int k = 0; k < a.getColumnCount(); k++)
 				{
-					aBlock[j][k] = inA.readInt();
+					aRow[k] = inA.readInt();
+//					aBlock[j][k] = inA.readInt();
+				}
+				if (!hashBlock.containsKey(aRow[aCol]))
+				{
+					ArrayList<int[]> intArray = new ArrayList<>();
+					intArray.add(aRow);
+					hashBlock.put(aRow[aCol], intArray);
+				}else
+				{
+					hashBlock.get(aRow[aCol]).add(aRow);
 				}
 				i++;
 			}
@@ -524,46 +563,23 @@ public class Main
 				{
 					bRow[k] = inB.readInt();
 				}
-				for (int k = 0; k < aBlockRow; k++)
+				if (hashBlock.containsKey(bRow[bCol]))
 				{
-					boolean pass = true;
-					for (String[] p : predicates)
+//						System.out.println(aBlock[k][aCol]+" "+bRow[bCol]);
+//						System.out.println("   "+bRow[bCol]);
+//						System.out.println(Arrays.toString(hashBlock.get(bRow[bCol]).toArray()));
+					ArrayList<int[]> intArray = hashBlock.get(bRow[bCol]);
+//						System.out.println();
+					for (int k = 0; k < intArray.size(); k++)
 					{
-						int aCol = 0, bCol = 0;
-						if (a.getPath().indexOf(p[0].charAt(0))>=0)
+						int[] aRow = intArray.get(k);
+//						System.out.println(Arrays.toString(aRow));
+						for (int l = 0; l < aRow.length; l++)
 						{
-							aCol = a.start(p[0].charAt(0)) + Integer.parseInt(p[0].substring(3));
-							bCol = b.start(p[1].charAt(0)) + Integer.parseInt(p[1].substring(3));
-						}else
-						{
-							aCol = a.start(p[1].charAt(0)) + Integer.parseInt(p[1].substring(3));
-							bCol = b.start(p[0].charAt(0)) + Integer.parseInt(p[0].substring(3));
+							dos.writeInt(aRow[l]);
 						}
-						if (aBlock[k][aCol] != bRow[bCol])
+						for (int l = 0; l < bRow.length; l++)
 						{
-							pass = false;
-						}
-					}
-					if (pass)
-					{
-//						if (a.getPath().equals("scan_D_and_A"))
-//						{
-//							System.out.println(a.getPath()+" : "+aCol+" : "+aBlock[k][aCol] + " , " + b.getPath()+" : "+bCol+" : "+bRow[bCol]);
-//						}
-						for (int l = 0; l < a.getColumnCount(); l++)
-						{
-//							if (!diffNum.get(l).contains(aBlock[k][l]))
-//							{
-//								diffNum.get(l).add(aBlock[k][l]);
-//							}
-							dos.writeInt(aBlock[k][l]);
-						}
-						for (int l = 0; l < b.getColumnCount(); l++)
-						{
-//							if (!diffNum.get(a.getColumnCount()+l).contains(bRow[l]))
-//							{
-//								diffNum.get(a.getColumnCount()+l).add(bRow[l]);
-//							}
 							dos.writeInt(bRow[l]);
 						}
 						rowCount++;
@@ -575,12 +591,7 @@ public class Main
 		inA.close();
 		dos.close();
 		Table t = new Table(resultName, a.getColumnCount()+b.getColumnCount(), rowCount);
-//		int[] numberOfUnique = new int[t.getColumnCount()];
-//		for (int i = 0; i < numberOfUnique.length; i++)
-//		{
-//			numberOfUnique[i] = diffNum.get(i).size();
-//		}
-//		t.setNumberOfUnique(numberOfUnique);
+
 		HashMap<Character, Integer> im = new HashMap<>(a.getIndexMap());
 		HashMap<Character, Integer> bm = b.getIndexMap();
 		for (Character key : bm.keySet())
@@ -589,34 +600,44 @@ public class Main
 		}
 		t.setIndexMap(im);
 		fileToDelete.add(t.getPath());
+//		System.out.println(t.toString());
 		return t;
 	}
 	public static void sum(Table t, String[] sums) throws IOException
 	{
 		long[] result = new long[sums.length];
 		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
-//		System.out.println(t.getRowCount());
+//		System.out.println(t);
+		int[] sumIndex = new int[sums.length];
+		for (int i = 0; i < sums.length; i++)
+		{
+			String sum = sums[i];
+			sumIndex[i] = t.start(sum.charAt(4))
+					+ Integer.parseInt(sum.substring(7, sum.length()-1));
+		}
+//		System.out.println(in.available()/4);
 		for (int i = 0; i < t.getRowCount(); i++)
 		{
-			//0123456789
-			//SUM(D.c0)
-			//SUM(D.c4)
-			//SUM(C.c12)
-//			System.out.println(t.getColumnCount());
 			for (int j = 0; j < t.getColumnCount(); j++)
 			{
-				int x = in.readInt();
-				for (int k = 0; k < sums.length; k++)
+				boolean skip = true;
+				for (int k = 0; k < sumIndex.length; k++)
 				{
-					String sum = sums[k];
-					if (j == t.start(sum.charAt(4))
-							+ Integer.parseInt(sum.substring(7, sum.length()-1)))
+					if (j == sumIndex[k])
 					{
+						int x = in.readInt();
 						result[k] = result[k] + x;
+						skip = false;
 					}
 				}
+				if (skip)
+				{
+					in.skipBytes(4);
+				}
+				
 			}
 		}
+		
 		for (int i = 0; i < result.length; i++)
 		{
 			if (t.getRowCount() != 0)
@@ -649,8 +670,15 @@ public class Main
 //		double result = a.getRowCount() * b.getRowCount() * Math.min(aUnique, bUnique);
 //		result = result / (aUnique * bUnique);
 //		System.out.println(result);
-		return Math.min(a.getColumnCount(), b.getColumnCount());
+		return a.getColumnCount() * b.getColumnCount();
 	}
+//	public static Table externalSort(Table t, int col) throws IOException
+//	{
+//		DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(t.getPath())));
+//		FileOutputStream fos = new FileOutputStream("sort_" + t.getPath());
+//		DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
+//
+//	}
 }
 
 

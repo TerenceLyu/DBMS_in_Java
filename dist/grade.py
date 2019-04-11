@@ -4,7 +4,6 @@ import subprocess
 import sys
 import time
 from timeit import default_timer as timer
-
 setup_seconds = int(sys.argv[1])
 timeout = int(sys.argv[2])
 path = sys.argv[3]
