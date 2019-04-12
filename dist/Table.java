@@ -11,7 +11,7 @@ public class Table
 	private String path;
 	private int columnCount;
 	private int rowCount;
-	private HashMap<Character, Integer> indexMap = new HashMap<>();
+	public HashMap<String, Integer> indexMap = new HashMap<>();
 //	private int[] numberOfUnique;
 	
 	public Table()
@@ -23,8 +23,6 @@ public class Table
 		this.path = path;
 		this.columnCount = columnCount;
 		this.rowCount = rowCount;
-//		this.numberOfUnique = new int[columnCount];
-		indexMap.put(path.charAt(0), 0);
 	}
 	
 	@Override
@@ -77,23 +75,23 @@ public class Table
 //		return numberOfUnique;
 //	}
 	
-	public int start(char x)
-	{
-		return indexMap.get(x);
-	}
+//	public int start(char x)
+//	{
+//		return indexMap.get(x);
+//	}
 	
-	public void addStart(char x, int y)
-	{
-		indexMap.put(x, y);
-	}
+//	public void addStart(char x, int y)
+//	{
+//		indexMap.put(x, y);
+//	}
 	
-	public void setIndexMap(HashMap<Character, Integer> indexMap)
-	{
-		this.indexMap = indexMap;
-	}
+//	public void setIndexMap(HashMap<Character, Integer> indexMap)
+//	{
+//		this.indexMap = indexMap;
+//	}
 	
-	public HashMap<Character, Integer> getIndexMap()
-	{
-		return indexMap;
-	}
+//	public HashMap<Character, Integer> getIndexMap()
+//	{
+//		return indexMap;
+//	}
 }

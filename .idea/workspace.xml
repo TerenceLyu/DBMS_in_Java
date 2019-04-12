@@ -31,15 +31,35 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="534" column="60" selection-start-line="534" selection-start-column="60" selection-end-line="534" selection-end-column="60" />
+            <state relative-caret-position="855">
+              <caret line="308" column="4" selection-start-line="308" selection-start-column="4" selection-end-line="308" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="n#!!doc;n#join#0;n#Main#0" />
-                <element signature="e#17791#18096#1" />
-                <element signature="e#19568#19640#0" />
+                <element signature="method#main#0;class#Main#0" />
+                <element signature="method#composeTable#0;class#Main#0" />
+                <element signature="method#buildTable#0;class#Main#0" />
+                <element signature="method#handle_Data_Loading#0;class#Main#0" />
+                <element signature="method#tableScan#0;class#Main#0" />
+                <element signature="e#8409#8695#1" />
+                <element signature="e#8722#8970#1" />
+                <element signature="e#8997#9245#1" />
+                <element signature="method#leftDeepJoin#0;class#Main#0" />
+                <element signature="method#filter#0;class#Main#0" />
+                <element signature="method#join#0;class#Main#0" />
+                <element signature="method#sum#0;class#Main#0" />
+                <element signature="e#16887#17386#1" />
+                <element signature="method#cost#0;class#Main#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/Relation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -47,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
+            <state relative-caret-position="350">
+              <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -56,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/grade.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-155">
+            <state relative-caret-position="175">
               <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -68,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+            <state relative-caret-position="595">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -79,6 +99,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -93,10 +114,12 @@
         <option value="$PROJECT_DIR$/dist/Triple.java" />
         <option value="$PROJECT_DIR$/dist/compile.sh" />
         <option value="$PROJECT_DIR$/dist/run.sh" />
-        <option value="$PROJECT_DIR$/dist/Table.java" />
         <option value="$PROJECT_DIR$/dist/grade.py" />
-        <option value="$PROJECT_DIR$/dist/run_with_data.py" />
+        <option value="$PROJECT_DIR$/dist/MainTest.java" />
+        <option value="$PROJECT_DIR$/dist/Relation.java" />
+        <option value="$PROJECT_DIR$/dist/Table.java" />
         <option value="$PROJECT_DIR$/dist/Main.java" />
+        <option value="$PROJECT_DIR$/dist/run_with_data.py" />
       </list>
     </option>
   </component>
@@ -112,7 +135,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -129,14 +151,22 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="jdk.selected.PYTHON_MODULE" value="Python 3.7" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="last_opened_file_path" value="C:/Program Files/jprofiler11/bin/jprofiler.exe" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -146,7 +176,15 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -179,6 +217,29 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cs127_pa3" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MainTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cs127_pa3" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MainTest" />
+      <option name="METHOD_NAME" value="main" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -234,12 +295,16 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.MainTest" />
+      <item itemvalue="JUnit.MainTest.main" />
       <item itemvalue="Python.grade" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.grade" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MainTest.main" />
+        <item itemvalue="JUnit.MainTest" />
+        <item itemvalue="Python.grade" />
       </list>
     </recent_temporary>
   </component>
@@ -265,17 +330,26 @@
       <workItem from="1554911280320" duration="19840000" />
       <workItem from="1554940606483" duration="12027000" />
       <workItem from="1555002695000" duration="13122000" />
+      <workItem from="1555025131985" duration="11734000" />
+      <workItem from="1555044007728" duration="1422000" />
+      <workItem from="1555045456806" duration="5086000" />
+      <workItem from="1555085159405" duration="13817000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="MainTest_main - 2019.04.12 at 00h 52m 32s.xml">
+      <configuration name="MainTest.main" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109125000" />
+    <option name="totallyTimeSpent" value="141184000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16937053" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17871486" />
       <window_info id="Nl-Palette" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -283,19 +357,20 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32658958" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.48265895" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32634228" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.48238254" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.329429" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32885906" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32942164" />
+      <window_info anchor="bottom" id="JProfiler" order="14" weight="0.329698" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Structure" order="1" weight="0.16353017" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -347,9 +422,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/proc_stderr">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/proc_stderr" />
     <entry file="file://$PROJECT_DIR$/data/xxxs/queries.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1767">
@@ -369,33 +442,6 @@
     <entry file="file://$PROJECT_DIR$/data/xxs/answers.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/proc_stdout">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/grade.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-155">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/io/PrintStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
@@ -407,16 +453,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/io/DataInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="396" column="18" selection-start-line="396" selection-start-column="18" selection-end-line="396" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/MainTest.java" />
+    <entry file="file://$PROJECT_DIR$/dist/proc_stdout" />
+    <entry file="file://$PROJECT_DIR$/dist/package.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/grade.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="534" column="60" selection-start-line="534" selection-start-column="60" selection-end-line="534" selection-end-column="60" />
+        <state relative-caret-position="855">
+          <caret line="308" column="4" selection-start-line="308" selection-start-column="4" selection-end-line="308" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="n#!!doc;n#join#0;n#Main#0" />
-            <element signature="e#17791#18096#1" />
-            <element signature="e#19568#19640#0" />
+            <element signature="method#main#0;class#Main#0" />
+            <element signature="method#composeTable#0;class#Main#0" />
+            <element signature="method#buildTable#0;class#Main#0" />
+            <element signature="method#handle_Data_Loading#0;class#Main#0" />
+            <element signature="method#tableScan#0;class#Main#0" />
+            <element signature="e#8409#8695#1" />
+            <element signature="e#8722#8970#1" />
+            <element signature="e#8997#9245#1" />
+            <element signature="method#leftDeepJoin#0;class#Main#0" />
+            <element signature="method#filter#0;class#Main#0" />
+            <element signature="method#join#0;class#Main#0" />
+            <element signature="method#sum#0;class#Main#0" />
+            <element signature="e#16887#17386#1" />
+            <element signature="method#cost#0;class#Main#0" />
           </folding>
         </state>
       </provider>
