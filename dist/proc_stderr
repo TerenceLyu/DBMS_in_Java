@@ -1,5 +1,0 @@
-Exception in thread "main" java.io.EOFException
-	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:397)
-	at Main.join(Main.java:555)
-	at Main.leftDeepJoin(Main.java:421)
-	at Main.main(Main.java:142)

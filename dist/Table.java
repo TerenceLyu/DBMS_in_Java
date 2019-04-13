@@ -12,7 +12,7 @@ public class Table
 	private int columnCount;
 	private int rowCount;
 	public HashMap<String, Integer> indexMap = new HashMap<>();
-//	private int[] numberOfUnique;
+	public int[] numberOfUnique;
 	
 	public Table()
 	{
@@ -23,6 +23,7 @@ public class Table
 		this.path = path;
 		this.columnCount = columnCount;
 		this.rowCount = rowCount;
+		numberOfUnique = new int[columnCount];
 	}
 	
 	@Override
