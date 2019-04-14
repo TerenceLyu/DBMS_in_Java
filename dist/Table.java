@@ -13,7 +13,7 @@ public class Table
 	private int rowCount;
 	public HashMap<String, Integer> indexMap = new HashMap<>();
 	public int[] numberOfUnique;
-	
+	public int[][] data;
 	public Table()
 	{
 	
@@ -51,20 +51,20 @@ public class Table
 		return rowCount;
 	}
 	
-	public void setPath(String path)
-	{
-		this.path = path;
-	}
-	
-	public void setColumnCount(int columnCount)
-	{
-		this.columnCount = columnCount;
-	}
-	
-	public void setRowCount(int rowCount)
-	{
-		this.rowCount = rowCount;
-	}
+//	public void setPath(String path)
+//	{
+//		this.path = path;
+//	}
+//
+//	public void setColumnCount(int columnCount)
+//	{
+//		this.columnCount = columnCount;
+//	}
+//
+//	public void setRowCount(int rowCount)
+//	{
+//		this.rowCount = rowCount;
+//	}
 	
 //	public void setNumberOfUnique(int[] numberOfUnique)
 //	{

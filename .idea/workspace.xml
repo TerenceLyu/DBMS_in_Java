@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="700" column="22" selection-start-line="700" selection-start-column="22" selection-end-line="700" selection-end-column="22" />
+            <state relative-caret-position="380">
+              <caret line="284" column="4" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -40,17 +40,21 @@
                 <element signature="method#handle_Data_Loading#0;class#Main#0" />
                 <element signature="method#composeTable#0;class#Main#0" />
                 <element signature="method#buildTable#0;class#Main#0" />
-                <element signature="e#8409#8695#1" />
-                <element signature="e#8722#8970#1" />
-                <element signature="e#8997#9245#1" />
+                <element signature="e#9349#12871#0" />
+                <element signature="e#10186#10204#1" />
+                <element signature="e#10278#10291#1" />
+                <element signature="e#11023#12681#1" />
                 <element signature="method#filter#0;class#Main#0" />
                 <element signature="method#leftDeepJoin#0;class#Main#0" />
-                <element signature="method#join#0;class#Main#0" />
-                <element signature="method#sum#0;class#Main#0" />
-                <element signature="method#mergeJoin#0;class#Main#0" />
-                <element signature="method#externalSort#0;class#Main#0" />
-                <element signature="method#mergeFile#0;class#Main#0" />
-                <element signature="e#20600#21225#1" />
+                <element signature="e#16185#19530#0" />
+                <element signature="e#17098#17148#1" />
+                <element signature="e#17710#19611#1" />
+                <element signature="e#19415#20980#1" />
+                <element signature="e#17526#19065#1" />
+                <element signature="method#cost#0;class#Main#0" />
+                <element signature="e#21899#22681#0" />
+                <element signature="e#26380#26410#1" expanded="true" />
+                <element signature="e#19864#19951#0" />
               </folding>
             </state>
           </provider>
@@ -68,8 +72,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="875">
-              <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
+            <state relative-caret-position="455">
+              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+              <folding>
+                <element signature="e#846#881#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -118,8 +125,8 @@
         <option value="$PROJECT_DIR$/dist/grade.py" />
         <option value="$PROJECT_DIR$/dist/MainTest.java" />
         <option value="$PROJECT_DIR$/dist/Relation.java" />
-        <option value="$PROJECT_DIR$/dist/run_with_data.py" />
         <option value="$PROJECT_DIR$/dist/Table.java" />
+        <option value="$PROJECT_DIR$/dist/run_with_data.py" />
         <option value="$PROJECT_DIR$/dist/Main.java" />
       </list>
     </option>
@@ -136,6 +143,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -152,7 +160,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,7 +341,8 @@
       <workItem from="1555025131985" duration="11734000" />
       <workItem from="1555044007728" duration="1422000" />
       <workItem from="1555045456806" duration="5086000" />
-      <workItem from="1555085159405" duration="37759000" />
+      <workItem from="1555085159405" duration="38363000" />
+      <workItem from="1555166654737" duration="21307000" />
     </task>
     <servers />
   </component>
@@ -344,13 +352,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165126000" />
+    <option name="totallyTimeSpent" value="187037000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17871486" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1811245" />
       <window_info id="Nl-Palette" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -389,6 +397,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dist/Table.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/cs127_pa3$grade.coverage" NAME="grade Coverage Results" MODIFIED="1555003405953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dist" />
@@ -476,17 +496,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
+        <state relative-caret-position="455">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding>
+            <element signature="e#846#881#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -497,10 +513,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="700" column="22" selection-start-line="700" selection-start-column="22" selection-end-line="700" selection-end-column="22" />
+        <state relative-caret-position="380">
+          <caret line="284" column="4" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -508,17 +531,21 @@
             <element signature="method#handle_Data_Loading#0;class#Main#0" />
             <element signature="method#composeTable#0;class#Main#0" />
             <element signature="method#buildTable#0;class#Main#0" />
-            <element signature="e#8409#8695#1" />
-            <element signature="e#8722#8970#1" />
-            <element signature="e#8997#9245#1" />
+            <element signature="e#9349#12871#0" />
+            <element signature="e#10186#10204#1" />
+            <element signature="e#10278#10291#1" />
+            <element signature="e#11023#12681#1" />
             <element signature="method#filter#0;class#Main#0" />
             <element signature="method#leftDeepJoin#0;class#Main#0" />
-            <element signature="method#join#0;class#Main#0" />
-            <element signature="method#sum#0;class#Main#0" />
-            <element signature="method#mergeJoin#0;class#Main#0" />
-            <element signature="method#externalSort#0;class#Main#0" />
-            <element signature="method#mergeFile#0;class#Main#0" />
-            <element signature="e#20600#21225#1" />
+            <element signature="e#16185#19530#0" />
+            <element signature="e#17098#17148#1" />
+            <element signature="e#17710#19611#1" />
+            <element signature="e#19415#20980#1" />
+            <element signature="e#17526#19065#1" />
+            <element signature="method#cost#0;class#Main#0" />
+            <element signature="e#21899#22681#0" />
+            <element signature="e#26380#26410#1" expanded="true" />
+            <element signature="e#19864#19951#0" />
           </folding>
         </state>
       </provider>
