@@ -31,7 +31,7 @@ proc.stdin.write(sql)
 proc.stdin.flush()
 
 start = timer()
-proc.wait(timeout=60*10 + 60*5)
+proc.wait(timeout=60*10000 + 60*5)
 stop = timer()
 
 print("Total time:", (stop - start))

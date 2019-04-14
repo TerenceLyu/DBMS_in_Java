@@ -165,12 +165,11 @@ public class Main
 		}
 		
 		File folder = new File("out");
-		String[]entries = folder.list();
-		for(String s: entries){
-			File currentFile = new File(folder.getPath(),s);
-			currentFile.delete();
-		}
-		folder.delete();
+//		String[]entries = folder.list();
+//		for(String s: entries){
+//			File currentFile = new File(folder.getPath(),s);
+//			currentFile.delete();
+//		}
 
 		
 //		Instant finish = Instant.now();
@@ -408,10 +407,11 @@ public class Main
 			for (int i = 0; i < tRowCount; i++)
 			{
 				int[] row = new int[tColCount];
-				for (int j = 0; j < tColCount; j++)
-				{
-					row[j] = in.readInt();
-				}
+				in.read(row);
+//				for (int j = 0; j < tColCount; j++)
+//				{
+//					row[j] =
+//				}
 				if (compare == '=')
 				{
 					if (row[col] == target)
@@ -419,8 +419,8 @@ public class Main
 						for (int k = 0; k < tColCount; k++)
 						{
 							diffNum.get(k).add(row[k]);
-							bdos.writeInt(row[k]);
 						}
+						bdos.write(row);
 						rowCount++;
 					}
 				}
@@ -431,8 +431,8 @@ public class Main
 						for (int k = 0; k < tColCount; k++)
 						{
 							diffNum.get(k).add(row[k]);
-							bdos.writeInt(row[k]);
 						}
+						bdos.write(row);
 						rowCount++;
 					}
 				}
@@ -443,8 +443,8 @@ public class Main
 						for (int k = 0; k < tColCount; k++)
 						{
 							diffNum.get(k).add(row[k]);
-							bdos.writeInt(row[k]);
 						}
+						bdos.write(row);
 						rowCount++;
 					}
 				}
@@ -498,27 +498,29 @@ public class Main
 		}else
 		{
 			BufferedDataInputStream in = new BufferedDataInputStream(new FileInputStream("out/" + t.getPath()));
-			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/" + fileName));
+			BufferedDataOutputStream bdos = new BufferedDataOutputStream(new FileOutputStream("out/" + fileName));
 			
 			for (int i = 0; i < tRowCount; i++)
 			{
 				int[] row = new int[tColCount];
-				for (int j = 0; j < tColCount; j++)
-				{
-					row[j] = in.readInt();
-				}
+				in.read(row);
+//				for (int j = 0; j < tColCount; j++)
+//				{
+//					row[j] = in.readInt();
+//				}
 				if (row[aCol] == row[bCol])
 				{
 					for (int j = 0; j < tColCount; j++)
 					{
 						diffNum.get(j).add(row[j]);
-						dos.writeInt(row[j]);
+//						dos.writeInt(row[j]);
 					}
+					bdos.write(row);
 					rowCount++;
 				}
 			}
 			in.close();
-			dos.close();
+			bdos.close();
 			nt = new Table(fileName, tColCount, rowCount);
 		}
 		
@@ -661,7 +663,7 @@ public class Main
 		}else if (b.data != null)
 		{
 			BufferedDataInputStream inA = new BufferedDataInputStream(new FileInputStream("out/"+a.getPath()));
-			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
+			BufferedDataOutputStream bdos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
 			for (int i = 0; i < aRowCount;)
 			{
 				//012345678910
@@ -672,10 +674,11 @@ public class Main
 				for (int j = 0; j < aBlockRow; j++)
 				{
 					int[] aRow = new int[aColCount];
-					for (int k = 0; k < aColCount; k++)
-					{
-						aRow[k] = inA.readInt();
-					}
+					inA.read(aRow);
+//					for (int k = 0; k < aColCount; k++)
+//					{
+//						aRow[k] = inA.readInt();
+//					}
 					if (!hashBlock.containsKey(aRow[aCol]))
 					{
 						ArrayList<int[]> intArray = new ArrayList<>();
@@ -698,25 +701,26 @@ public class Main
 							for (int l = 0; l < aColCount; l++)
 							{
 								diffNum.get(l).add(aRow[l]);
-								dos.writeInt(aRow[l]);
+//								dos.writeInt(aRow[l]);
 							}
 							for (int l = 0; l < bColCount; l++)
 							{
 								diffNum.get(aColCount+l).add(b.data[j][l]);
-								dos.writeInt(b.data[j][l]);
+//								dos.writeInt(b.data[j][l]);
 							}
+							bdos.write(concatenate(aRow, b.data[j]));
 							rowCount++;
 						}
 					}
 				}
 			}
 			inA.close();
-			dos.close();
+			bdos.close();
 			t = new Table(resultName, aColCount+bColCount, rowCount);
 		}else if (a.data != null)
 		{
 			BufferedDataInputStream inB = new BufferedDataInputStream(new FileInputStream("out/"+b.getPath()));
-			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
+			BufferedDataOutputStream bdos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
 			for (int i = 0; i < bRowCount;)
 			{
 				//012345678910
@@ -727,10 +731,11 @@ public class Main
 				for (int j = 0; j < BlockRow; j++)
 				{
 					int[] bRow = new int[bColCount];
-					for (int k = 0; k < bColCount; k++)
-					{
-						bRow[k] = inB.readInt();
-					}
+					inB.read(bRow);
+//					for (int k = 0; k < bColCount; k++)
+//					{
+//						bRow[k] = inB.readInt();
+//					}
 					if (!hashBlock.containsKey(bRow[bCol]))
 					{
 						ArrayList<int[]> intArray = new ArrayList<>();
@@ -754,25 +759,26 @@ public class Main
 							for (int l = 0; l < aColCount; l++)
 							{
 								diffNum.get(l).add(a.data[j][l]);
-								dos.writeInt(a.data[j][l]);
+//								dos.writeInt(a.data[j][l]);
 							}
 							for (int l = 0; l < bColCount; l++)
 							{
 								diffNum.get(l).add(aColCount+bRow[l]);
-								dos.writeInt(bRow[l]);
+//								dos.writeInt(bRow[l]);
 							}
+							bdos.write(concatenate(a.data[j], bRow));
 							rowCount++;
 						}
 					}
 				}
 			}
 			inB.close();
-			dos.close();
+			bdos.close();
 			t = new Table(resultName, aColCount+bColCount, rowCount);
 		}else
 		{
 			BufferedDataInputStream inA = new BufferedDataInputStream(new FileInputStream("out/"+a.getPath()));
-			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
+			BufferedDataOutputStream bdos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
 			
 			for (int i = 0; i < aRowCount;)
 			{
@@ -784,10 +790,11 @@ public class Main
 				for (int j = 0; j < aBlockRow; j++)
 				{
 					int[] aRow = new int[aColCount];
-					for (int k = 0; k < aColCount; k++)
-					{
-						aRow[k] = inA.readInt();
-					}
+					inA.read(aRow);
+//					for (int k = 0; k < aColCount; k++)
+//					{
+//						aRow[k] = inA.readInt();
+//					}
 					if (!hashBlock.containsKey(aRow[aCol]))
 					{
 						ArrayList<int[]> intArray = new ArrayList<>();
@@ -803,10 +810,11 @@ public class Main
 				for (int j = 0; j < bRowCount; j++)
 				{
 					int[] bRow = new int[bColCount];
-					for (int k = 0; k < bColCount; k++)
-					{
-						bRow[k] = inB.readInt();
-					}
+					inB.read(bRow);
+//					for (int k = 0; k < bColCount; k++)
+//					{
+//						bRow[k] = inB.readInt();
+//					}
 					ArrayList<int[]> intArray = hashBlock.get(bRow[bCol]);
 					if (intArray != null)
 					{
@@ -816,13 +824,14 @@ public class Main
 							for (int l = 0; l < aRow.length; l++)
 							{
 								diffNum.get(l).add(aRow[l]);
-								dos.writeInt(aRow[l]);
+//								dos.writeInt(aRow[l]);
 							}
 							for (int l = 0; l < bRow.length; l++)
 							{
 								diffNum.get(aColCount+l).add(bRow[l]);
-								dos.writeInt(bRow[l]);
+//								dos.writeInt(bRow[l]);
 							}
+							bdos.write(concatenate(aRow, bRow));
 							rowCount++;
 						}
 					}
@@ -830,7 +839,7 @@ public class Main
 				inB.close();
 			}
 			inA.close();
-			dos.close();
+			bdos.close();
 			t = new Table(resultName, aColCount+bColCount, rowCount);
 		}
 		for (int i = 0; i < aColCount+bColCount; i++)
