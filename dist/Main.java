@@ -6,6 +6,7 @@
  */
 import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
@@ -203,14 +204,15 @@ public class Main
 			String line = br.readLine();
 			String[] cols = line.split(",");
 			int columnCount = cols.length;
-			DataOutputStream[] dos = new DataOutputStream[columnCount];
+			BufferedDataOutputStream[] bdos = new BufferedDataOutputStream[columnCount];
+			
 			String[] outName = new String[columnCount];
 			ArrayList<HashSet<Integer>> diffNum = new ArrayList<>(columnCount);
 			for (int i = 0; i < columnCount; i++)
 			{
 				diffNum.add(new HashSet<>());
 				outName[i] = (char) letter + ".c" + i;
-				dos[i] = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("out/" + outName[i])));
+				bdos[i] = new BufferedDataOutputStream(new FileOutputStream("out/" + outName[i]));
 			}
 			FileReader fr = new FileReader(new File(filename));
 			CharBuffer cb1 = CharBuffer.allocate(4 * 1024);
@@ -229,7 +231,7 @@ public class Main
 					{
 						int intToWrite = Integer.parseInt(cb1, startOfNumber, i, 10);
 						diffNum.get(col).add(intToWrite);
-						dos[col].writeInt(intToWrite);
+						bdos[col].writeInt(intToWrite);
 						col = (col + 1)%columnCount;
 						if (cb1.charAt(i) == '\n')
 						{
@@ -255,7 +257,7 @@ public class Main
 			for (int i = 0; i < columnCount; i++)
 			{
 				unique.put(outName[i], diffNum.get(i).size());
-				dos[i].close();
+				bdos[i].close();
 			}
 			Relation r = new Relation(outName, rowCount, columnCount);
 			//			t.setNumberOfUnique(numberOfUnique);
@@ -287,11 +289,11 @@ public class Main
 		String[] allCol = cols.toArray(String[]::new);
 		Arrays.sort(allCol);
 		int colCount = allCol.length;
-		DataInputStream[] in = new DataInputStream[colCount];
+		BufferedDataInputStream[] in = new BufferedDataInputStream[colCount];
 		HashMap<String, Integer> indexMap = new HashMap<>();
 		for (int i = 0; i < colCount; i++)
 		{
-			in[i] = new DataInputStream(new BufferedInputStream(new FileInputStream("out/" + allCol[i])));
+			in[i] = new BufferedDataInputStream(new FileInputStream("out/" + allCol[i]));
 			indexMap.put(allCol[i], i);
 		}
 		Table t = new Table(String.valueOf(n), colCount, rowCount);
@@ -311,16 +313,16 @@ public class Main
 //			FileOutputStream out = new FileOutputStream("out/" + n);
 //			FileChannel file = out.getChannel();
 //			ByteBuffer buf = file.map(FileChannel.MapMode.READ_WRITE, 0, 4 * rowCount * colCount);
-			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("out/" + n)));
+			BufferedDataOutputStream bdos = new BufferedDataOutputStream(new FileOutputStream("out/" + n));
 			for (int i = 0; i < rowCount; i++)
 			{
 				
 				for (int j = 0; j < colCount; j++)
 				{
-					dos.writeInt(in[j].readInt());
+					bdos.writeInt(in[j].readInt());
 				}
 			}
-			dos.close();
+			bdos.close();
 		}
 		for (int i = 0; i < colCount; i++)
 		{
@@ -401,10 +403,8 @@ public class Main
 			nt.data = result.toArray(new int[rowCount][]);
 		}else
 		{
-			DataInputStream in = new DataInputStream(new BufferedInputStream(
-					new FileInputStream("out/" + t.getPath())));
-			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(
-					new FileOutputStream("out/scan_" + t.getPath())));
+			BufferedDataInputStream in = new BufferedDataInputStream(new FileInputStream("out/" + t.getPath()));
+			BufferedDataOutputStream bdos = new BufferedDataOutputStream(new FileOutputStream("out/scan_" + t.getPath()));
 			for (int i = 0; i < tRowCount; i++)
 			{
 				int[] row = new int[tColCount];
@@ -419,7 +419,7 @@ public class Main
 						for (int k = 0; k < tColCount; k++)
 						{
 							diffNum.get(k).add(row[k]);
-							dos.writeInt(row[k]);
+							bdos.writeInt(row[k]);
 						}
 						rowCount++;
 					}
@@ -431,7 +431,7 @@ public class Main
 						for (int k = 0; k < tColCount; k++)
 						{
 							diffNum.get(k).add(row[k]);
-							dos.writeInt(row[k]);
+							bdos.writeInt(row[k]);
 						}
 						rowCount++;
 					}
@@ -443,7 +443,7 @@ public class Main
 						for (int k = 0; k < tColCount; k++)
 						{
 							diffNum.get(k).add(row[k]);
-							dos.writeInt(row[k]);
+							bdos.writeInt(row[k]);
 						}
 						rowCount++;
 					}
@@ -451,7 +451,7 @@ public class Main
 			}
 			nt = new Table("scan_" + t.getPath(), tColCount, rowCount);
 			in.close();
-			dos.close();
+			bdos.close();
 		}
 		for (int i = 0; i < tColCount; i++)
 		{
@@ -497,8 +497,8 @@ public class Main
 			nt.data = result.toArray(new int[rowCount][]);
 		}else
 		{
-			DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("out/" + t.getPath())));
-			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("out/" + fileName)));
+			BufferedDataInputStream in = new BufferedDataInputStream(new FileInputStream("out/" + t.getPath()));
+			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/" + fileName));
 			
 			for (int i = 0; i < tRowCount; i++)
 			{
@@ -660,10 +660,8 @@ public class Main
 			t.data = result.toArray(new int[rowCount][]);
 		}else if (b.data != null)
 		{
-			DataInputStream inA = new DataInputStream(new BufferedInputStream(
-					new FileInputStream("out/"+a.getPath())));
-			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(
-					new FileOutputStream("out/"+resultName)));
+			BufferedDataInputStream inA = new BufferedDataInputStream(new FileInputStream("out/"+a.getPath()));
+			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
 			for (int i = 0; i < aRowCount;)
 			{
 				//012345678910
@@ -717,10 +715,8 @@ public class Main
 			t = new Table(resultName, aColCount+bColCount, rowCount);
 		}else if (a.data != null)
 		{
-			DataInputStream inB = new DataInputStream(new BufferedInputStream(
-					new FileInputStream("out/"+b.getPath())));
-			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(
-					new FileOutputStream("out/"+resultName)));
+			BufferedDataInputStream inB = new BufferedDataInputStream(new FileInputStream("out/"+b.getPath()));
+			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
 			for (int i = 0; i < bRowCount;)
 			{
 				//012345678910
@@ -775,10 +771,8 @@ public class Main
 			t = new Table(resultName, aColCount+bColCount, rowCount);
 		}else
 		{
-			DataInputStream inA = new DataInputStream(new BufferedInputStream(
-					new FileInputStream("out/"+a.getPath())));
-			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(
-					new FileOutputStream("out/"+resultName)));
+			BufferedDataInputStream inA = new BufferedDataInputStream(new FileInputStream("out/"+a.getPath()));
+			BufferedDataOutputStream dos = new BufferedDataOutputStream(new FileOutputStream("out/"+resultName));
 			
 			for (int i = 0; i < aRowCount;)
 			{
@@ -805,9 +799,7 @@ public class Main
 					}
 				}
 				i = i + aBlockRow;
-				DataInputStream inB = new DataInputStream(new BufferedInputStream(
-						new FileInputStream("out/"+b.getPath())));
-				
+				BufferedDataInputStream inB = new BufferedDataInputStream(new FileInputStream("out/"+b.getPath()));
 				for (int j = 0; j < bRowCount; j++)
 				{
 					int[] bRow = new int[bColCount];
@@ -889,7 +881,7 @@ public class Main
 			}
 		}else
 		{
-			DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("out/"+t.getPath())));
+			BufferedDataInputStream in = new BufferedDataInputStream(new FileInputStream("out/"+t.getPath()));
 			for (int i = 0; i < tRowCount; i++)
 			{
 				for (int j = 0; j < tColCount; j++)
