@@ -10,7 +10,7 @@ public class Table
 {
 	private String path;
 	private int columnCount;
-	private int rowCount;
+	private long rowCount;
 	public HashMap<String, Integer> indexMap = new HashMap<>();
 	public int[] numberOfUnique;
 	public int[][] data;
@@ -18,7 +18,7 @@ public class Table
 	{
 	
 	}
-	public Table(String path, int columnCount, int rowCount)
+	public Table(String path, int columnCount, long rowCount)
 	{
 		this.path = path;
 		this.columnCount = columnCount;
@@ -46,7 +46,7 @@ public class Table
 		return columnCount;
 	}
 	
-	public int getRowCount()
+	public long getRowCount()
 	{
 		return rowCount;
 	}

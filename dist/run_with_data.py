@@ -20,7 +20,7 @@ proc = subprocess.Popen(
 proc.stdin.write(",".join(tables) + "\n")
 proc.stdin.flush()
 
-time.sleep(5)
+time.sleep(130)
 
 with open(os.path.join(sys.argv[1], "queries.sql")) as f:
     sql = f.read()
