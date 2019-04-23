@@ -9,8 +9,8 @@ import java.util.HashMap;
 public class Table
 {
 	private String path;
-	private int columnCount;
-	private long rowCount;
+	public int columnCount;
+	public long rowCount;
 	public HashMap<String, Integer> indexMap = new HashMap<>();
 	public int[] numberOfUnique;
 	public int[] max;

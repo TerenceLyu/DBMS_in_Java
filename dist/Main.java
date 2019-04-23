@@ -73,31 +73,31 @@ public class Main
 			{
 				usefulCol.add(y.split(" ", 2)[0]);
 			}
-			HashMap<Character, Table> tables = composeTable(usefulCol, tableNames, relations);
-			Table scanned = new Table("X", 0, 0);
-			HashMap<String, ArrayList<String>> tableScan= new HashMap<>();
-			for (int j = 0; j < scans.length; j++)
-			{
-				for (int k = 0; k < tableNames.length; k++)
-				{
-					if (tableNames[k].charAt(0) == scans[j].charAt(0)){
-						if (!tableScan.containsKey(tableNames[k]))
-						{
-							ArrayList<String> scanList = new ArrayList<>();
-							scanList.add(scans[j]);
-							tableScan.put(tableNames[k], scanList);
-						}else
-						{
-							tableScan.get(tableNames[k]).add(scans[j]);
-						}
-					}
-				}
-			}
-			for (String tableName : tableScan.keySet())
-			{
-				scanned = tableScan(tables.get(tableName.charAt(0)), tableScan.get(tableName));
-				tables.put(tableName.charAt(0), scanned);
-			}
+			HashMap<Character, Table> tables = composeTable(usefulCol, tableNames, relations, scans);
+//			Table scanned = new Table("X", 0, 0);
+//			HashMap<String, ArrayList<String>> tableScan= new HashMap<>();
+//			for (int j = 0; j < scans.length; j++)
+//			{
+//				for (int k = 0; k < tableNames.length; k++)
+//				{
+//					if (tableNames[k].charAt(0) == scans[j].charAt(0)){
+//						if (!tableScan.containsKey(tableNames[k]))
+//						{
+//							ArrayList<String> scanList = new ArrayList<>();
+//							scanList.add(scans[j]);
+//							tableScan.put(tableNames[k], scanList);
+//						}else
+//						{
+//							tableScan.get(tableNames[k]).add(scans[j]);
+//						}
+//					}
+//				}
+//			}
+//			for (String tableName : tableScan.keySet())
+//			{
+//				scanned = tableScan(tables.get(tableName.charAt(0)), tableScan.get(tableName));
+//				tables.put(tableName.charAt(0), scanned);
+//			}
 //			System.out.println("table scaned");
 			//first join
 			String[] joins = where.split(" AND | and ");
@@ -174,12 +174,12 @@ public class Main
 //			}catch (Exception e){}
 		}
 		
-//		File folder = new File("out");
-//		String[]entries = folder.list();
-//		for(String s: entries){
-//			File currentFile = new File(folder.getPath(),s);
-//			currentFile.delete();
-//		}
+		File folder = new File("out");
+		String[]entries = folder.list();
+		for(String s: entries){
+			File currentFile = new File(folder.getPath(),s);
+			currentFile.delete();
+		}
 
 		
 //		Instant finish = Instant.now();
@@ -294,11 +294,15 @@ public class Main
 		}
 		return relations;
 	}
-	public static HashMap<Character, Table> composeTable(ArrayList<String> usefulCol, String[] tableNames, HashMap<Character, Relation> r) throws IOException
+	public static HashMap<Character, Table> composeTable(ArrayList<String> usefulCol,
+	                                                     String[] tableNames,
+	                                                     HashMap<Character, Relation> r,
+	                                                     String[] scans) throws IOException
 	{
 		HashMap<Character, Table> tableMap = new HashMap<>();
 		for (String name : tableNames)
 		{
+			ArrayList<String> pList = new ArrayList<>();
 			char n = name.charAt(0);
 			Set<String> completeCol = new HashSet<>();
 			for (String col : usefulCol)
@@ -308,11 +312,19 @@ public class Main
 					completeCol.add(col);
 				}
 			}
-			tableMap.put(n, buildTable(n, completeCol, r.get(n).rowCount));
+			for (String p : scans)
+			{
+				if (p.indexOf(n)>=0)
+				{
+					pList.add(p);
+				}
+			}
+			tableMap.put(n, buildTable(n, completeCol, r.get(n).rowCount, pList));
 		}
 		return tableMap;
 	}
-	public static Table buildTable(char n, Set<String> cols, int rowCount) throws IOException
+	public static Table buildTable(char n, Set<String> cols, int rowCount,
+	                               ArrayList<String> predicates) throws IOException
 	{
 		String[] allCol = cols.toArray(String[]::new);
 		Arrays.sort(allCol);
@@ -324,18 +336,64 @@ public class Main
 			in[i] = new BufferedDataInputStream(new FileInputStream("out/"+allCol[i]));
 			indexMap.put(allCol[i], i);
 		}
+		ArrayList<int[]> pdc = new ArrayList<>();
+		for (String predicate : predicates)
+		{
+			String[] p = predicate.split(" ");
+			int compare = (int) p[1].charAt(0) - 60;
+			int target = Integer.parseInt(p[2]);
+			int col = indexMap.get(p[0]);
+			int[] all = new int[3];
+			all[0] = col;
+			all[1] = compare;
+			all[2] = target;
+			pdc.add(all);
+		}
+		int[] min = new int[colCount];
+		int[] max = new int[colCount];
+		boolean first = true;
+		
 		Table t = new Table(String.valueOf(n), colCount, rowCount);
+		int tRowCount = 0;
 		if (rowCount<10000)
 		{
-			int[][] data = new int[rowCount][colCount];
+			ArrayList<int[]> result = new ArrayList<>();
 			for (int i = 0; i < rowCount; i++)
 			{
+				int[] row = new int[colCount];
 				for (int j = 0; j < colCount; j++)
 				{
-					data[i][j] = in[j].readInt();
+					row[j] = in[j].readInt();
+				}
+				boolean pass = true;
+				for (int[] pList : pdc)
+				{
+					if (!check(pList, row[pList[0]]))
+					{
+						pass = false;
+					}
+				}
+				if (pass)
+				{
+					if (!predicates.isEmpty())
+					{
+						for (int j = 0; j < colCount; j++)
+						{
+							if (row[j]>max[j])
+							{
+								max[j] = row[j];
+							}
+							if (row[j]<min[j])
+							{
+								min[j] = row[j];
+							}
+						}
+					}
+					result.add(row);
+					tRowCount++;
 				}
 			}
-			t.data = data;
+			t.data = result.toArray(new int[rowCount][]);
 		}else
 		{
 //			FileOutputStream out = new FileOutputStream("out/" + n);
@@ -345,6 +403,7 @@ public class Main
 //			System.out.println(n);
 			for (int i = 0; i < rowCount;)
 			{
+				
 				int blockCount = Math.min(rowCount-i, 5000);
 				int[][] block = new int[colCount][blockCount];
 				for (int j = 0; j < colCount; j++)
@@ -354,22 +413,62 @@ public class Main
 				i = i + blockCount;
 				for (int j = 0; j < blockCount; j++)
 				{
+					int[] row = new int[colCount];
 					for (int k = 0; k < colCount; k++)
 					{
-						bdos.writeInt(block[k][j]);
+						
+						row[k] = block[k][j];
+					}
+					boolean pass = true;
+					for (int[] pList : pdc)
+					{
+						if (!check(pList, row[pList[0]]))
+						{
+							pass = false;
+						}
+					}
+					if (pass)
+					{
+						if (!predicates.isEmpty())
+						{
+							for (int k = 0; k < colCount; k++)
+							{
+								if (row[k]>max[k])
+								{
+									max[k] = row[k];
+								}
+								if (row[k]<min[k])
+								{
+									min[k] = row[k];
+								}
+							}
+						}
+						tRowCount++;
+						bdos.write(row);
 					}
 				}
 			}
 			bdos.close();
 		}
-		t.max = new int[colCount];
-		t.min = new int[colCount];
-		for (int i = 0; i < colCount; i++)
+		if (!predicates.isEmpty())
 		{
-			t.max[i] = MAX.get(allCol[i]);
-			t.min[i] = MIN.get(allCol[i]);
-			in[i].close();
+			t.max = max;
+			t.min = min;
+			for (int i = 0; i < colCount; i++)
+			{
+				in[i].close();
+			}
+		}else
+		{
+			t.max = new int[colCount];
+			t.min = new int[colCount];
+			for (int i = 0; i < colCount; i++)
+			{
+				t.max[i] = MAX.get(allCol[i]);
+				t.min[i] = MIN.get(allCol[i]);
+			}
 		}
+		t.rowCount = tRowCount;
 		t.indexMap = indexMap;
 //		System.err.println(t);
 		return t;
@@ -542,7 +641,7 @@ public class Main
 		nt.min = min;
 		HashMap<String, Integer> im = new HashMap<>(t.indexMap);
 		nt.indexMap = im;
-//		System.err.println(nt);
+		System.err.println(nt);
 		return nt;
 	}
 	public static boolean check (int[] pList, int value)

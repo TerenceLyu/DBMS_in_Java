@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7d961ac-d90c-43f2-9c96-60316b626108" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/dist/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,18 +28,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="175" column="8" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="175" selection-end-column="8" />
+            <state relative-caret-position="289">
+              <caret line="473" column="17" selection-start-line="473" selection-start-column="17" selection-end-line="473" selection-end-column="17" />
               <folding>
-                <element signature="e#1454#5328#1" />
-                <element signature="e#10742#11006#1" />
-                <element signature="e#12238#13483#1" />
-                <element signature="e#14486#14527#0" />
-                <element signature="e#20377#21997#1" />
-                <element signature="e#22024#23650#1" />
-                <element signature="e#23657#25583#1" />
-                <element signature="e#29721#29751#1" expanded="true" />
-                <element signature="e#29174#29261#0" />
+                <element signature="e#993#5986#0" expanded="true" />
+                <element signature="e#1270#1301#0" />
+                <element signature="e#2617#2659#0" />
+                <element signature="e#8614#9138#0" expanded="true" />
+                <element signature="e#12362#12395#0" />
+                <element signature="e#13655#13696#0" />
+                <element signature="e#14773#15007#0" />
+                <element signature="e#19145#26763#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            <state relative-caret-position="-124">
+              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -63,7 +65,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
+            <state relative-caret-position="527">
               <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
             </state>
           </provider>
@@ -92,13 +94,13 @@
         <option value="$PROJECT_DIR$/dist/grade.py" />
         <option value="$PROJECT_DIR$/dist/MainTest.java" />
         <option value="$PROJECT_DIR$/dist/Relation.java" />
-        <option value="$PROJECT_DIR$/dist/Table.java" />
         <option value="$PROJECT_DIR$/dist/run_with_data.py" />
+        <option value="$PROJECT_DIR$/dist/Table.java" />
         <option value="$PROJECT_DIR$/dist/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-14" />
     <option name="y" value="-14" />
     <option name="width" value="2572" />
@@ -109,6 +111,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -126,7 +129,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -151,7 +153,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="tasks.timeTracking" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -311,6 +313,7 @@
       <workItem from="1555085159405" duration="38363000" />
       <workItem from="1555166654737" duration="21307000" />
       <workItem from="1555258155921" duration="26242000" />
+      <workItem from="1556032822349" duration="3102000" />
     </task>
     <servers />
   </component>
@@ -321,12 +324,13 @@
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="230269000" />
+    <option name="totallyTimeSpent" value="233371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15055159" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1535969" />
       <window_info id="Nl-Palette" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -574,32 +578,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
+        <state relative-caret-position="527">
           <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        <state relative-caret-position="-124">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="175" column="8" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="175" selection-end-column="8" />
+        <state relative-caret-position="289">
+          <caret line="473" column="17" selection-start-line="473" selection-start-column="17" selection-end-line="473" selection-end-column="17" />
           <folding>
-            <element signature="e#1454#5328#1" />
-            <element signature="e#10742#11006#1" />
-            <element signature="e#12238#13483#1" />
-            <element signature="e#14486#14527#0" />
-            <element signature="e#20377#21997#1" />
-            <element signature="e#22024#23650#1" />
-            <element signature="e#23657#25583#1" />
-            <element signature="e#29721#29751#1" expanded="true" />
-            <element signature="e#29174#29261#0" />
+            <element signature="e#993#5986#0" expanded="true" />
+            <element signature="e#1270#1301#0" />
+            <element signature="e#2617#2659#0" />
+            <element signature="e#8614#9138#0" expanded="true" />
+            <element signature="e#12362#12395#0" />
+            <element signature="e#13655#13696#0" />
+            <element signature="e#14773#15007#0" />
+            <element signature="e#19145#26763#0" expanded="true" />
           </folding>
         </state>
       </provider>
