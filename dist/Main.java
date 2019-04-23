@@ -174,12 +174,12 @@ public class Main
 //			}catch (Exception e){}
 		}
 		
-		File folder = new File("out");
-		String[]entries = folder.list();
-		for(String s: entries){
-			File currentFile = new File(folder.getPath(),s);
-			currentFile.delete();
-		}
+//		File folder = new File("out");
+//		String[]entries = folder.list();
+//		for(String s: entries){
+//			File currentFile = new File(folder.getPath(),s);
+//			currentFile.delete();
+//		}
 
 		
 //		Instant finish = Instant.now();
