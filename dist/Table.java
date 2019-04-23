@@ -13,6 +13,8 @@ public class Table
 	private long rowCount;
 	public HashMap<String, Integer> indexMap = new HashMap<>();
 	public int[] numberOfUnique;
+	public int[] max;
+	public int[] min;
 	public int[][] data;
 	public Table()
 	{

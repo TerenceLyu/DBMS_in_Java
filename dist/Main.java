@@ -29,7 +29,8 @@ public class Main
 	//WHERE A.c2 = C.c0 AND A.c3 = D.c0 AND C.c2 = D.c2
 	//AND C.c2 = 2247;
 //	public static Queue<String> fileToDelete = new LinkedList<>();
-	public static HashMap<String, Integer> unique = new HashMap<>();
+	public static HashMap<String, Integer> MAX = new HashMap<>();
+	public static HashMap<String, Integer> MIN = new HashMap<>();
 	public static void main(String[] args) throws IOException
 	{
 		new File("out").mkdirs();
@@ -37,7 +38,7 @@ public class Main
 //		System.out.println("data loaded");
 		Scanner input = new Scanner(System.in);
 		int numberOfQueries = input.nextInt();
-//		for (int i = 0; i < 14; i++)
+//		for (int i = 0; i < 3; i++)
 //		{
 //			input.nextLine();
 //			input.nextLine();
@@ -45,8 +46,6 @@ public class Main
 //			input.nextLine();
 //			input.nextLine();
 //		}
-		
-//		Instant start = Instant.now();
 		for (int i = 0; i < numberOfQueries; i++)
 		{
 			input.nextLine();//skip empty line
@@ -215,14 +214,22 @@ public class Main
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String line = br.readLine();
 			String[] cols = line.split(",");
+			
 			int columnCount = cols.length;
+			int[] max = new int[columnCount];
+			int[] min = new int[columnCount];
+			for (int i = 0; i < columnCount; i++)
+			{
+				int value = Integer.parseInt(cols[i]);
+				max[i] = value;
+				min[i] = value;
+			}
 			BufferedDataOutputStream[] bdos = new BufferedDataOutputStream[columnCount];
 			
 			String[] outName = new String[columnCount];
-			ArrayList<HashSet<Integer>> diffNum = new ArrayList<>(columnCount);
+			
 			for (int i = 0; i < columnCount; i++)
 			{
-				diffNum.add(new HashSet<>());
 				outName[i] = (char) letter + ".c" + i;
 				bdos[i] = new BufferedDataOutputStream(new FileOutputStream("out/"+outName[i]));
 //				System.out.println(outName[i]);
@@ -243,7 +250,14 @@ public class Main
 					if (cb1.charAt(i) == ',' || cb1.charAt(i) == '\n')
 					{
 						int intToWrite = Integer.parseInt(cb1, startOfNumber, i, 10);
-						diffNum.get(col).add(intToWrite);
+						if (max[col]< intToWrite)
+						{
+							max[col] = intToWrite;
+						}
+						if (min[col]> intToWrite)
+						{
+							min[col] = intToWrite;
+						}
 						bdos[col].writeInt(intToWrite);
 						col = (col + 1)%columnCount;
 						if (cb1.charAt(i) == '\n')
@@ -269,7 +283,8 @@ public class Main
 			fr.close();
 			for (int i = 0; i < columnCount; i++)
 			{
-				unique.put(outName[i], diffNum.get(i).size());
+				MAX.put(outName[i], max[i]);
+				MIN.put(outName[i], min[i]);
 				bdos[i].close();
 			}
 			Relation r = new Relation(outName, rowCount, columnCount);
@@ -347,13 +362,16 @@ public class Main
 			}
 			bdos.close();
 		}
+		t.max = new int[colCount];
+		t.min = new int[colCount];
 		for (int i = 0; i < colCount; i++)
 		{
-			t.numberOfUnique[i] = unique.get(allCol[i]);
+			t.max[i] = MAX.get(allCol[i]);
+			t.min[i] = MIN.get(allCol[i]);
 			in[i].close();
 		}
 		t.indexMap = indexMap;
-//		System.out.println(t);
+//		System.err.println(t);
 		return t;
 	}
 	public static Table tableScan(Table t, ArrayList<String> predicates) throws IOException
@@ -380,15 +398,14 @@ public class Main
 		long rowCount = 0;
 		long tRowCount = t.getRowCount();
 		int tColCount = t.getColumnCount();
-		ArrayList<HashSet<Integer>> diffNum = new ArrayList<>(tColCount);
-		for (int i = 0; i < tColCount; i++)
-		{
-			diffNum.add(new HashSet<>());
-		}
-		ArrayList<int[]> result = new ArrayList<>();
+		int[] min = new int[tColCount];
+		int[] max = new int[tColCount];
+		boolean first = true;
+		
 		Table nt;
 		if (t.data != null)
 		{
+			ArrayList<int[]> result = new ArrayList<>();
 			for (int i = 0; i < tRowCount; i++)
 			{
 				boolean pass = true;
@@ -401,54 +418,40 @@ public class Main
 				}
 				if (pass)
 				{
-					for (int j = 0; j < tColCount; j++)
+					if (first)
 					{
-						diffNum.get(j).add(t.data[i][j]);
+						max = t.data[i].clone();
+						min = t.data[i].clone();
+						first = false;
+					}else {
+						for (int j = 0; j < tColCount; j++)
+						{
+							if (t.data[i][j]>max[j])
+							{
+								max[j] = t.data[i][j];
+							}
+							if (t.data[i][j]<min[j])
+							{
+								min[j] = t.data[i][j];
+							}
+						}
 					}
+					
 					result.add(t.data[i]);
+//					for (int[] array : result)
+//					{
+//						System.err.println(Arrays.toString(array));
+//					}
+//					System.err.println();
 					rowCount++;
 				}
-//				if (compare == '=')
-//				{
-//					if (t.data[i][col] == target)
-//					{
-////					    System.out.println(row[col]);
-//						for (int j = 0; j < tColCount; j++)
-//						{
-//							diffNum.get(j).add(t.data[i][j]);
-//						}
-//						result.add(t.data[i]);
-//						rowCount++;
-//					}
-//				}
-//				if (compare == '>')
-//				{
-//					if (t.data[i][col] > target)
-//					{
-////					    System.out.println(row[col]);
-//						for (int j = 0; j < tColCount; j++)
-//						{
-//							diffNum.get(j).add(t.data[i][j]);
-//						}
-//						result.add(t.data[i]);
-//						rowCount++;
-//					}
-//				}
-//				if (compare == '<')
-//				{
-//					if (t.data[i][col] < target)
-//					{
-////					    System.out.println(row[col]);
-//						for (int j = 0; j < tColCount; j++)
-//						{
-//							diffNum.get(j).add(t.data[i][j]);
-//						}
-//						result.add(t.data[i]);
-//						rowCount++;
-//					}
-//				}
 			}
 			nt = new Table("scan_" + t.getPath(), tColCount, rowCount);
+//			System.err.println();
+//			for (int[] array : result)
+//			{
+//				System.err.println(Arrays.toString(array));
+//			}
 			nt.data = result.toArray(new int[(int)rowCount][]);
 		}else
 		{
@@ -469,9 +472,23 @@ public class Main
 				}
 				if (pass)
 				{
-					for (int j = 0; j < tColCount; j++)
+					if (first)
 					{
-						diffNum.get(j).add(row[j]);
+						max = row.clone();
+						min = row.clone();
+						first = false;
+					}else {
+						for (int j = 0; j < tColCount; j++)
+						{
+							if (row[j]>max[j])
+							{
+								max[j] = row[j];
+							}
+							if (row[j]<min[j])
+							{
+								min[j] = row[j];
+							}
+						}
 					}
 					bdos.write(row);
 					rowCount++;
@@ -521,13 +538,11 @@ public class Main
 			in.close();
 			bdos.close();
 		}
-		for (int i = 0; i < tColCount; i++)
-		{
-			nt.numberOfUnique[i] = diffNum.get(i).size();
-		}
+		nt.max = max;
+		nt.min = min;
 		HashMap<String, Integer> im = new HashMap<>(t.indexMap);
 		nt.indexMap = im;
-//		System.out.println(nt);
+//		System.err.println(nt);
 		return nt;
 	}
 	public static boolean check (int[] pList, int value)
@@ -562,14 +577,11 @@ public class Main
 		long rowCount = 0;
 		long tRowCount = t.getRowCount();
 		int tColCount = t.getColumnCount();
-		
 		int aCol = t.indexMap.get(p[0]);
 		int bCol = t.indexMap.get(p[1]);
-		ArrayList<HashSet<Integer>> diffNum = new ArrayList<>(tColCount);
-		for (int i = 0; i < tColCount; i++)
-		{
-			diffNum.add(new HashSet<>());
-		}
+		int[] min = new int[tColCount];
+		int[] max = new int[tColCount];
+		boolean first = true;
 		ArrayList<int[]> result = new ArrayList<>();
 		Table nt;
 		if (t.data != null)
@@ -578,9 +590,23 @@ public class Main
 			{
 				if (t.data[i][aCol] == t.data[i][bCol])
 				{
-					for (int j = 0; j < tColCount; j++)
+					if (first)
 					{
-						diffNum.get(j).add(t.data[i][j]);
+						max = t.data[i].clone();
+						min = t.data[i].clone();
+						first = false;
+					}else {
+						for (int j = 0; j < tColCount; j++)
+						{
+							if (t.data[i][j]>max[j])
+							{
+								max[j] = t.data[i][j];
+							}
+							if (t.data[i][j]<min[j])
+							{
+								min[j] = t.data[i][j];
+							}
+						}
 					}
 					result.add(t.data[i]);
 					rowCount++;
@@ -603,10 +629,24 @@ public class Main
 //				}
 				if (row[aCol] == row[bCol])
 				{
-					for (int j = 0; j < tColCount; j++)
+					if (first)
 					{
-						diffNum.get(j).add(row[j]);
-//						dos.writeInt(row[j]);
+						max = row.clone();
+						min = row.clone();
+						first = false;
+						
+					}else {
+						for (int j = 0; j < tColCount; j++)
+						{
+							if (row[j]>max[j])
+							{
+								max[j] = row[j];
+							}
+							if (row[j]<min[j])
+							{
+								min[j] = row[j];
+							}
+						}
 					}
 					bdos.write(row);
 					rowCount++;
@@ -616,13 +656,10 @@ public class Main
 			bdos.close();
 			nt = new Table(fileName, tColCount, rowCount);
 		}
-		
-		for (int i = 0; i < tColCount; i++)
-		{
-			nt.numberOfUnique[i] = diffNum.get(i).size();
-		}
+		nt.max = max;
+		nt.min = min;
 		nt.indexMap = t.indexMap;
-//		fileToDelete.add(nt.getPath());
+//		System.err.println(nt);
 		return nt;
 	}
 	public static Table leftDeepJoin(Table t, HashMap<Character, Table> tables, ArrayList<String> joinArray) throws IOException
@@ -701,11 +738,9 @@ public class Main
 	}
 	public static Table join(Table a, Table b, String predicate) throws IOException
 	{
-//		System.out.println(a.getPath()+" join "+b.getPath());
-//		System.out.println(a.toString());
-//		System.out.println(b.toString());
-//		System.out.println(a.data != null);
-//		System.out.println(b.data != null);
+//		System.err.println(a.getPath()+" join "+b.getPath());
+//		System.err.println(a.toString());
+//		System.err.println(b.toString());
 		String resultName = a.getPath() + "_and_" + b.getPath();
 		long rowCount = 0;
 		String[] p = predicate.split(" = ");
@@ -723,30 +758,43 @@ public class Main
 		long aRowCount = a.getRowCount();
 		int bColCount = b.getColumnCount();
 		long bRowCount = b.getRowCount();
-		ArrayList<HashSet<Integer>> diffNum = new ArrayList<>(aColCount+bColCount);
-		for (int i = 0; i < aColCount+bColCount; i++)
-		{
-			diffNum.add(new HashSet<>());
-		}
+		int[] min = new int[aColCount+bColCount];
+		int[] max = new int[aColCount+bColCount];
+		boolean first = true;
 		Table t;
 		if (a.data != null && b.data != null)
 		{
 			ArrayList<int[]> result = new ArrayList<>();
 			for (int i = 0; i < aRowCount; i++)
 			{
+//				System.err.println(Arrays.toString(a.data[i]));
 				for (int j = 0; j < bRowCount; j++)
 				{
 					if (a.data[i][aCol] == b.data[j][bCol])
 					{
-						for (int l = 0; l < aColCount; l++)
+//						System.err.println(a.data[i][aCol] + " " + b.data[j][bCol]);
+						int[] row = concatenate(a.data[i], b.data[j]);
+						if (first)
 						{
-							diffNum.get(l).add(a.data[i][l]);
-						}
-						for (int l = 0; l < bColCount; l++)
+							max = row.clone();
+							min = row.clone();
+							first = false;
+						}else
 						{
-							diffNum.get(aColCount+l).add(b.data[j][l]);
+							for (int k = 0; k < aColCount+bColCount; k++)
+							{
+								if (row[k]>max[k])
+								{
+									max[k] = row[k];
+								}
+								if (row[k]<min[k])
+								{
+									min[k] = row[k];
+								}
+							}
 						}
-						result.add(concatenate(a.data[i], b.data[j]));
+//						System.out.println(Arrays.toString(row));
+						result.add(row);
 						rowCount++;
 					}
 				}
@@ -792,17 +840,27 @@ public class Main
 					{
 						for (int[] aRow : intArray)
 						{
-							for (int l = 0; l < aColCount; l++)
+							int[] row = concatenate(aRow, b.data[j]);
+							if (first)
 							{
-								diffNum.get(l).add(aRow[l]);
-//								dos.writeInt(aRow[l]);
-							}
-							for (int l = 0; l < bColCount; l++)
+								max = row.clone();
+								min = row.clone();
+								first = false;
+							}else
 							{
-								diffNum.get(aColCount+l).add(b.data[j][l]);
-//								dos.writeInt(b.data[j][l]);
+								for (int k = 0; k < aColCount+bColCount; k++)
+								{
+									if (row[k]>max[k])
+									{
+										max[k] = row[k];
+									}
+									if (row[k]<min[k])
+									{
+										min[k] = row[k];
+									}
+								}
 							}
-							bdos.write(concatenate(aRow, b.data[j]));
+							bdos.write(row);
 							rowCount++;
 						}
 					}
@@ -851,17 +909,27 @@ public class Main
 						for (int[] bRow : intArray)
 						{
 							
-							for (int l = 0; l < aColCount; l++)
+							int[] row = concatenate(a.data[j], bRow);
+							if (first)
 							{
-								diffNum.get(l).add(a.data[j][l]);
-//								dos.writeInt(a.data[j][l]);
-							}
-							for (int l = 0; l < bColCount; l++)
+								max = row.clone();
+								min = row.clone();
+								first = false;
+							}else
 							{
-								diffNum.get(l).add(aColCount+bRow[l]);
-//								dos.writeInt(bRow[l]);
+								for (int k = 0; k < aColCount+bColCount; k++)
+								{
+									if (row[k]>max[k])
+									{
+										max[k] = row[k];
+									}
+									if (row[k]<min[k])
+									{
+										min[k] = row[k];
+									}
+								}
 							}
-							bdos.write(concatenate(a.data[j], bRow));
+							bdos.write(row);
 							rowCount++;
 						}
 					}
@@ -915,18 +983,26 @@ public class Main
 					{
 						for (int[] aRow : intArray)
 						{
-//						    System.out.println(Arrays.toString(aRow));
-							for (int l = 0; l < aColCount; l++)
+							int[] row = concatenate(aRow, bRow);
+							if (first)
 							{
-								diffNum.get(l).add(aRow[l]);
-//								dos.writeInt(aRow[l]);
+								max = row.clone();
+								min = row.clone();
+								first = false;
+							}else {
+								for (int k = 0; k < aColCount+bColCount; k++)
+								{
+									if (row[k]>max[k])
+									{
+										max[k] = row[k];
+									}
+									if (row[k]<min[k])
+									{
+										min[k] = row[k];
+									}
+								}
 							}
-							for (int l = 0; l < bColCount; l++)
-							{
-								diffNum.get(aColCount+l).add(bRow[l]);
-//								dos.writeInt(bRow[l]);
-							}
-							bdos.write(concatenate(aRow, bRow));
+							bdos.write(row);
 							rowCount++;
 						}
 					}
@@ -937,10 +1013,8 @@ public class Main
 			bdos.close();
 			t = new Table(resultName, aColCount+bColCount, rowCount);
 		}
-		for (int i = 0; i < aColCount+bColCount; i++)
-		{
-			t.numberOfUnique[i] = diffNum.get(i).size();
-		}
+		t.max = max;
+		t.min = min;
 		HashMap<String, Integer> im = new HashMap<>(a.indexMap);
 		HashMap<String, Integer> bm = b.indexMap;
 		for (String key : bm.keySet())
@@ -949,7 +1023,7 @@ public class Main
 		}
 		t.indexMap = im;
 //		fileToDelete.add(t.getPath());
-//		System.out.println(t.toString());
+//		System.err.println(t.toString());
 		return t;
 	}
 	public static void sum(Table t, String[] sums) throws IOException
@@ -1029,8 +1103,8 @@ public class Main
 		
 		int aCol = a.indexMap.get(as);
 		int bCol = b.indexMap.get(bs);
-		int aUnique = a.numberOfUnique[aCol];
-		int bUnique = b.numberOfUnique[bCol];
+		int aUnique = a.max[aCol] - a.min[aCol];
+		int bUnique = b.max[bCol] - b.min[bCol];
 //		System.out.println(as + " " + bs);
 //		System.out.println(a.toString());
 //		System.out.println(aUnique);

@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f7d961ac-d90c-43f2-9c96-60316b626108" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cs127_pa3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs127_pa3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/grade.py" beforeDir="false" afterPath="$PROJECT_DIR$/dist/grade.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/run_with_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/dist/run_with_data.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,31 +30,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="59" column="22" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="22" />
+            <state relative-caret-position="2445">
+              <caret line="872" column="8" selection-start-line="872" selection-start-column="8" selection-end-line="872" selection-end-column="8" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#2665#2911#1" />
-                <element signature="e#5552#7820#0" />
-                <element signature="e#7822#8346#0" />
-                <element signature="e#8348#9734#0" />
-                <element signature="e#11806#11831#0" />
-                <element signature="e#13486#13527#0" />
-                <element signature="e#12592#12646#1" />
-                <element signature="e#13885#14105#0" />
-                <element signature="e#12743#14497#0" />
-                <element signature="e#13677#14319#1" />
-                <element signature="e#14499#16454#0" />
-                <element signature="e#16456#23292#0" />
-                <element signature="e#17449#18051#1" />
-                <element signature="e#18078#19575#1" />
-                <element signature="e#19602#21104#1" />
-                <element signature="e#21111#22896#1" />
-                <element signature="e#23294#25045#0" />
-                <element signature="e#25047#25694#0" />
-                <element signature="e#25696#26478#0" />
-                <element signature="e#26479#26566#0" />
+                <element signature="e#933#5953#0" expanded="true" />
+                <element signature="e#1454#5328#1" />
+                <element signature="e#11199#15376#0" expanded="true" />
+                <element signature="e#10742#11006#1" />
+                <element signature="e#12238#13483#1" />
+                <element signature="e#14486#14527#0" />
+                <element signature="e#19743#20350#1" />
+                <element signature="e#20377#21997#1" />
+                <element signature="e#22024#23650#1" />
+                <element signature="e#23657#25583#1" />
+                <element signature="e#29721#29751#1" expanded="true" />
+                <element signature="e#29174#29261#0" />
               </folding>
             </state>
           </provider>
@@ -64,23 +53,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-              <folding>
-                <element signature="e#846#881#0" />
-              </folding>
+            <state relative-caret-position="31">
+              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/grade.py">
+        <entry file="file://$PROJECT_DIR$/dist/Relation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="21" column="10" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="310">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -88,30 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/IO_Util/BufferedDataInputStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3535">
-              <caret line="259" column="5" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#6512#7238#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/IO_Util/BufferedDataOutputStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8435">
-              <caret line="244" column="26" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="26" />
+            <state relative-caret-position="372">
+              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -156,7 +117,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -174,6 +134,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -368,13 +329,13 @@
   </component>
   <component name="TimeTrackingManager">
     <option name="enabled" value="true" />
-    <option name="totallyTimeSpent" value="217973000" />
+    <option name="totallyTimeSpent" value="229191000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12811245" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15055159" />
       <window_info id="Nl-Palette" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -396,7 +357,6 @@
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32942164" />
       <window_info anchor="bottom" id="JProfiler" order="14" weight="0.329698" />
-      <window_info active="true" anchor="right" id="Time Tracking" visible="true" weight="0.16827309" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Structure" order="1" weight="0.16353017" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -410,6 +370,7 @@
       <window_info anchor="right" id="Theme Preview" order="10" />
       <window_info anchor="right" id="Maven" order="11" />
       <window_info anchor="right" id="SciView" order="12" />
+      <window_info anchor="right" id="Time Tracking" order="13" weight="0.16827309" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,7 +381,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dist/Table.java</url>
-          <line>53</line>
+          <line>55</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -500,13 +461,6 @@
     <entry file="file://$PROJECT_DIR$/dist/MainTest.java" />
     <entry file="file://$PROJECT_DIR$/dist/package.sh">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/Relation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/IO_Util/BufferDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -608,22 +562,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-          <folding>
-            <element signature="e#846#881#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/proc_stderr">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/proc_stdout">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/proc_stderr" />
+    <entry file="file://$PROJECT_DIR$/dist/proc_stdout" />
     <entry file="file://$PROJECT_DIR$/dist/grade.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -634,40 +574,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dist/run_with_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        <state relative-caret-position="372">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="59" column="22" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="22" />
+        <state relative-caret-position="2445">
+          <caret line="872" column="8" selection-start-line="872" selection-start-column="8" selection-end-line="872" selection-end-column="8" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#2665#2911#1" />
-            <element signature="e#5552#7820#0" />
-            <element signature="e#7822#8346#0" />
-            <element signature="e#8348#9734#0" />
-            <element signature="e#11806#11831#0" />
-            <element signature="e#13486#13527#0" />
-            <element signature="e#12592#12646#1" />
-            <element signature="e#13885#14105#0" />
-            <element signature="e#12743#14497#0" />
-            <element signature="e#13677#14319#1" />
-            <element signature="e#14499#16454#0" />
-            <element signature="e#16456#23292#0" />
-            <element signature="e#17449#18051#1" />
-            <element signature="e#18078#19575#1" />
-            <element signature="e#19602#21104#1" />
-            <element signature="e#21111#22896#1" />
-            <element signature="e#23294#25045#0" />
-            <element signature="e#25047#25694#0" />
-            <element signature="e#25696#26478#0" />
-            <element signature="e#26479#26566#0" />
+            <element signature="e#933#5953#0" expanded="true" />
+            <element signature="e#1454#5328#1" />
+            <element signature="e#11199#15376#0" expanded="true" />
+            <element signature="e#10742#11006#1" />
+            <element signature="e#12238#13483#1" />
+            <element signature="e#14486#14527#0" />
+            <element signature="e#19743#20350#1" />
+            <element signature="e#20377#21997#1" />
+            <element signature="e#22024#23650#1" />
+            <element signature="e#23657#25583#1" />
+            <element signature="e#29721#29751#1" expanded="true" />
+            <element signature="e#29174#29261#0" />
           </folding>
         </state>
       </provider>
